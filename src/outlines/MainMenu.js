@@ -40,13 +40,19 @@ const MainMenu = () => {
           href="/member/list"
           className={classNames({ on: menuCode === 'member' })}
         >
-          {t('회원관리')}
+          {t('회원 관리')}
         </a>
         <a
           href="/board/list"
           className={classNames({ on: menuCode === 'board' })}
         >
-          {t('게시판목록')}
+          {t('게시판 목록')}
+        </a>
+        <a
+          href="/counseling"
+          className={classNames({ on: menuCode === 'counseling' })}
+        >
+          {t('상담 관리')}
         </a>
         <a href='/counseling' className={classNames({ on: menuCode === 'counseling'})}>{t('상담관리')}</a>
       </Menus>
