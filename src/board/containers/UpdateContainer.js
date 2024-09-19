@@ -2,12 +2,15 @@
 import React, { useLayoutEffect} from 'react';
 import { getCommonActions } from '@/commons/contexts/CommonContext';
 
-const UpdateContainer = () => {
+const UpdateContainer = ({ params }) => {
     const { setMenuCode, setSubMenuCode } = getCommonActions();
+
+    const { bid } = params;
+
     useLayoutEffect(() => {
         setMenuCode("board");
-        setSubMenuCode("register");
-    }, [setSubMenuCode, setMenuCode]);
+        setSubMenuCode(bid ? "update" : "register");
+    }, [setSubMenuCode, setMenuCode, bid]);
     
     return <h1>게시판 등록/수정</h1>
 };
