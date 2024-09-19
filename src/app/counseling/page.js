@@ -1,5 +1,12 @@
+import AdminOnlyContainer from '@/member/containers/AdminOnlyContainer';
+import ApplicationListContainer from '@/counseling/containers/ApplicationListContainer';
+
 const counselingPage = () => {
-  return <h1>상담 신청 목록</h1>;
+  return (
+    <AdminOnlyContainer>
+      <ApplicationListContainer />
+    </AdminOnlyContainer>
+  );
 };
 
 export default counselingPage;
