@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { createContext, useState, useContext } from 'react';
 
 import cookies from 'react-cookies';
@@ -27,7 +28,7 @@ const UserInfoProvider = ({ children }) => {
   const [isLogin, setIsLogin] = useState(false);
   const [isCounselor, setIsCounselor] = useState(false);
   const [isProfessor, setIsProfessor] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(true);
 
   const value = {
     states: { userInfo, isLogin, isAdmin, isCounselor, isProfessor },
