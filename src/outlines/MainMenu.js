@@ -24,7 +24,7 @@ const Menus = styled.aside`
     a.on {
       background: ${({ theme }) => theme.colors.black};
     }
-  }
+  
 `;
 
 const MainMenu = () => {
@@ -47,6 +47,12 @@ const MainMenu = () => {
           className={classNames({ on: menuCode === 'board' })}
         >
           {t('게시판목록')}
+        </a>
+        <a
+          href="/counseling"
+          className={classNames({ on: menuCode === 'counseling' })}
+        >
+          {t('상담관리')}
         </a>
       </Menus>
     )
