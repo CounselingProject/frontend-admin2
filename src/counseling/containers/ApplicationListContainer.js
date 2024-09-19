@@ -10,7 +10,7 @@ const ApplicationListContainer = ({ searchParams }) => {
     setSubMenuCode('apply');
   }, [setMenuCode, setSubMenuCode]);
 
-  return <h1>신청 목록...</h1>;
+  return <h1>상담 신청 목록</h1>;
 };
 
 export default React.memo(ApplicationListContainer);

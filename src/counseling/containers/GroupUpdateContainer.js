@@ -12,7 +12,7 @@ const GroupUpdateContainer = ({ params }) => {
     setSubMenuCode(seq ? 'update' : 'register');
   }, [setMenuCode, setSubMenuCode, seq]);
 
-  return <h1>집단 상담 프로그램 등록/수정...</h1>;
+  return <h1>집단 상담 프로그램 등록/수정</h1>;
 };
 
 export default React.memo(GroupUpdateContainer);
