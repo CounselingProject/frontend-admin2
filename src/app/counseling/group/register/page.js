@@ -1,5 +1,12 @@
-const GroupRegisterPage = () => {
-  return <h1>집단 상담 프로그램 등록</h1>;
+import AdminOnlyContainer from '@/member/containers/AdminOnlyContainer';
+import GroupListContainer from '@/counseling/containers/GroupListContainer';
+
+const GroupRegisterPage = ({ searchParams }) => {
+  return (
+    <AdminOnlyContainer>
+      <GroupListContainer searchParams={searchParams} />
+    </AdminOnlyContainer>
+  );
 };
 
 export default GroupRegisterPage;

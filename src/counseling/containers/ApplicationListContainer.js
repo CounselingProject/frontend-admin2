@@ -1,4 +1,4 @@
-'use Client';
+'use client';
 import React, { useLayoutEffect } from 'react';
 import { getCommonActions } from '@/commons/contexts/CommonContext';
 
@@ -9,7 +9,8 @@ const ApplicationListContainer = ({ searchParams }) => {
     setMenuCode('counseling');
     setSubMenuCode('apply');
   }, [setMenuCode, setSubMenuCode]);
-  return <h1>신청 목록</h1>;
+
+  return <h1>상담 신청 목록</h1>;
 };
 
 export default React.memo(ApplicationListContainer);

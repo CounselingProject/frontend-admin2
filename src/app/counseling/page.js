@@ -1,10 +1,10 @@
 import AdminOnlyContainer from '@/member/containers/AdminOnlyContainer';
 import ApplicationListContainer from '@/counseling/containers/ApplicationListContainer';
 
-const counselingPage = () => {
+const counselingPage = ({ searchParams }) => {
   return (
     <AdminOnlyContainer>
-      <ApplicationListContainer />
+      <ApplicationListContainer searchParams={searchParams} />
     </AdminOnlyContainer>
   );
 };
