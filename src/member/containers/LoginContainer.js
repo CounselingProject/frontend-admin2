@@ -19,14 +19,7 @@ const LoginContainer = ({ searchParams }) => {
   const [form, setForm] = useState({});
   const [errors, setErrors] = useState({});
 
-  const {
-    setIsLogin,
-    setIsAdmin,
-    setIsStudent,
-    setIsCounselor,
-    setIsProfessor,
-    setUserInfo,
-  } = getUserActions();
+  const { setIsLogin, setIsAdmin, setUserInfo, setIsCounselor, setIsProfessor } = getUserActions();
 
   const onSubmit = useCallback(
     (e) => {
@@ -93,18 +86,7 @@ const LoginContainer = ({ searchParams }) => {
           setErrors({ ..._errors });
         });
     },
-    [
-      form,
-      router,
-      searchParams,
-      setIsAdmin,
-      setIsCounselor,
-      setIsLogin,
-      setIsProfessor,
-      setIsStudent,
-      setUserInfo,
-      t,
-    ],
+    [form, router, searchParams, setIsAdmin, setIsLogin, setUserInfo, setIsCounselor, setIsProfessor, t],
   );
 
   const onChange = useCallback((e) => {
