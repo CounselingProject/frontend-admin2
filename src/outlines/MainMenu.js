@@ -54,6 +54,7 @@ const MainMenu = () => {
         >
           {t('상담 관리')}
         </a>
+        <a href='/counseling' className={classNames({ on: menuCode === 'counseling'})}>{t('상담관리')}</a>
       </Menus>
     )
   );
