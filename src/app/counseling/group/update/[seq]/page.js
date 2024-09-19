@@ -1,5 +1,12 @@
-const GroupUpdatePage = () => {
-  return <h1>집단 상담 프로그램 수정</h1>;
+import AdminOnlyContainer from '@/member/containers/AdminOnlyContainer';
+import GroupUpdateContainer from '@/counseling/containers/GroupUpdateContainer';
+
+const GroupUpdatePage = ({ params }) => {
+  return (
+    <AdminOnlyContainer>
+      <GroupUpdateContainer params={params} />
+    </AdminOnlyContainer>
+  );
 };
 
 export default GroupUpdatePage;
