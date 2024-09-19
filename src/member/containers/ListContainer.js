@@ -2,7 +2,7 @@
 import React, { useLayoutEffect } from 'react';
 import { getCommonActions } from '@/commons/contexts/CommonContext';
 
-const ListContainer = () => {
+const ListContainer = ({ searchParams }) => {
   const { setMenuCode, setSubMenuCode } = getCommonActions();
 
   useLayoutEffect(() => {
