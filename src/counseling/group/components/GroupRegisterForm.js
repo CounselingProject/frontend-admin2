@@ -109,7 +109,7 @@ const GroupRegisterForm = ({ onSubmit, }) => {
       <dd>
       <StyledInput
       type="text"
-      name="sdate"
+      name="sdatde"
       onChange={onChange}
       />
       </dd>
