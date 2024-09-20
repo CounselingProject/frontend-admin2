@@ -82,12 +82,16 @@ const GroupRegisterForm = ({ form, onSubmit, onChange }) => {
 					Bold, Essentials, Italic, Mention, Paragraph,  Undo , Image,ImageInsert
 				],
 				mention: {
-					// Mention configuration
 				},
-				initialData: '<p>집단상담 프로그램 설명을 입력하세요</p>',
+				
 			} }
       data={form?.gdes}
       onReady={(editor) => setEditor(editor)}
+      onChange={(_, editor) => {
+        onChange({
+          target: { name: 'content', value: editor.getData() },
+        });
+      }}
 		/>
         </dd>
       </dl>
