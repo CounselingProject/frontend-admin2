@@ -105,15 +105,26 @@ const GroupRegisterForm = ({ onSubmit, }) => {
       </dd>
     </dl>
     <dl>
-      <dt>{t('집단상담 프로그램 신청 시작일')}</dt>
+      <dt>{t('인원')}</dt>
       <dd>
       <StyledInput
       type="text"
-      name="sdatde"
+      name="sdate"
       onChange={onChange}
       />
       </dd>
     </dl>
+    <dl>
+      <dt>{t('파일업로드')}</dt>
+      <dd>
+        <StyledInput
+        type="image"
+        name="file"
+        onChange={onChange}
+        />
+      </dd>
+    </dl>
+
 
 
 
