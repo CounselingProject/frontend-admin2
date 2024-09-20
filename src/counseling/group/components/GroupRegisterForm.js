@@ -94,6 +94,27 @@ const GroupRegisterForm = ({ onSubmit, }) => {
       />
       </dd>
     </dl>
+    <dl>
+      <dt>{t('상담일시')}</dt>
+      <dd>
+      <StyledInput
+      type="text"
+      name="date"
+      onChange={onChange}
+      />
+      </dd>
+    </dl>
+    <dl>
+      <dt>{t('집단상담 프로그램 신청 시작일')}</dt>
+      <dd>
+      <StyledInput
+      type="text"
+      name="sdate"
+      onChange={onChange}
+      />
+      </dd>
+    </dl>
+
 
 
   </FormBox>;
