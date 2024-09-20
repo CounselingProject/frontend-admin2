@@ -10,21 +10,20 @@ const Menus = styled.aside`
   background: ${({ theme }) => theme.colors.gray};
 
   a {
-      display: block;
-      background: ${({ theme }) => theme.colors.primary};
-      line-height: 60px;
-      font-size: ${({ theme }) => theme.fontSizes.mediumLarge}px;
-      color: ${({ theme }) => theme.colors.white};
-      padding: 0 20px;
-      display: block;
-    }
-    a + a { 
-        border-top: 1px solid ${({ theme }) => theme.colors.gray};
-    }
-    a.on {
-      background: ${({ theme }) => theme.colors.black};
-    }
-  
+    display: block;
+    background: ${({ theme }) => theme.colors.primary};
+    line-height: 60px;
+    font-size: ${({ theme }) => theme.fontSizes.mediumLarge}px;
+    color: ${({ theme }) => theme.colors.white};
+    padding: 0 20px;
+    display: block;
+  }
+  a + a {
+    border-top: 1px solid ${({ theme }) => theme.colors.gray};
+  }
+  a.on {
+    background: ${({ theme }) => theme.colors.black};
+  }
 `;
 
 const MainMenu = () => {
@@ -46,16 +45,14 @@ const MainMenu = () => {
           href="/board/list"
           className={classNames({ on: menuCode === 'board' })}
         >
-          {t('게시판 목록')}
+          {t('게시판 관리')}
         </a>
         <a
           href="/counseling"
           className={classNames({ on: menuCode === 'counseling' })}
         >
-
           {t('상담관리')}
         </a>
-
       </Menus>
     )
   );
