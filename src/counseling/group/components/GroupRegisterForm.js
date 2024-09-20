@@ -24,7 +24,7 @@ const GroupRegisterForm = ({ onSubmit, }) => {
 
   return <FormBox autoComplete="off" onSubmit={onSubmit}>
     <dl>
-      <dt>{t('집단상담프로그램명')}</dt>
+      <dt>{t('집단상담프로그램명d')}</dt>
       <dd>
       <StyledInput>
 
