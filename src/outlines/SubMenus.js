@@ -2,7 +2,6 @@
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import classNames from 'classnames';
-import Link from 'next/link';
 import { getCommonStates } from '@/commons/contexts/CommonContext';
 
 const SubMenuBox = styled.nav`
@@ -31,13 +30,13 @@ const SubMenus = () => {
     subMenus.length > 0 && (
       <SubMenuBox>
         {subMenus.map(({ code, name, url }) => (
-          <Link
+          <a
             key={code}
             href={url}
             className={classNames({ on: code === subMenuCode })}
           >
             {name}
-          </Link>
+          </a>
         ))}
       </SubMenuBox>
     )
@@ -45,6 +44,7 @@ const SubMenus = () => {
 };
 
 function getSubMenus(menuCode) {
+  console.log('menuCode', menuCode);
   switch (menuCode) {
     case 'member': // 회원 관리
       return [{ code: 'list', name: '회원 목록', url: '/member/list' }];
@@ -70,7 +70,6 @@ function getSubMenus(menuCode) {
         },
       ];
     default:
-
       return [];
   }
 }
