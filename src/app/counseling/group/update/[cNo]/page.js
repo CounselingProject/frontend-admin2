@@ -1,10 +1,10 @@
 import AdminOnlyContainer from '@/member/containers/AdminOnlyContainer';
 import GroupUpdateContainer from '@/counseling/containers/GroupUpdateContainer';
 
-const GroupUpdatePage = ({ searchParams }) => {
+const GroupUpdatePage = ({ params }) => {
   return (
     <AdminOnlyContainer>
-      <GroupUpdateContainer searparams={params} />
+      <GroupUpdateContainer params={params} />
     </AdminOnlyContainer>
   );
 };

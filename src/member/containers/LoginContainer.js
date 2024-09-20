@@ -10,7 +10,6 @@ import { apiLogin } from '../apis/apiLogin';
 import { getUserActions } from '@/commons/contexts/UserInfoContext';
 const LoginContainer = ({ searchParams }) => {
   const router = useRouter();
-
   const { t } = useTranslation();
   const { setMainTitle } = getCommonActions();
   useLayoutEffect(() => {
@@ -20,13 +19,7 @@ const LoginContainer = ({ searchParams }) => {
   const [form, setForm] = useState({});
   const [errors, setErrors] = useState({});
 
-  const {
-    setIsLogin,
-    setIsAdmin,
-    setUserInfo,
-    setIsCounselor,
-    setIsProfessor,
-  } = getUserActions();
+  const { setIsLogin, setIsAdmin, setUserInfo, setIsCounselor, setIsProfessor } = getUserActions();
 
   const onSubmit = useCallback(
     (e) => {
@@ -70,6 +63,7 @@ const LoginContainer = ({ searchParams }) => {
               setUserInfo(user);
 
               setIsAdmin(user.userType === 'ADMIN'); // 관리자 여부
+              setIsStudent(user.userType === 'STUDENT');
               setIsCounselor(user.userType === 'COUNSELOR');
               setIsProfessor(user.userType === 'PROFESSOR');
 
@@ -92,17 +86,7 @@ const LoginContainer = ({ searchParams }) => {
           setErrors({ ..._errors });
         });
     },
-    [
-      form,
-      router,
-      searchParams,
-      setIsAdmin,
-      setIsLogin,
-      setUserInfo,
-      setIsCounselor,
-      setIsProfessor,
-      t,
-    ],
+    [form, router, searchParams, setIsAdmin, setIsLogin, setUserInfo, setIsCounselor, setIsProfessor, t],
   );
 
   const onChange = useCallback((e) => {
