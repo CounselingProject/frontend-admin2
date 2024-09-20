@@ -1,3 +1,4 @@
+import { GroupButton } from '@/commons/components/buttons/GroupButton';
 import { StyledInput } from '@/commons/components/inputs/StyledInput';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -7,9 +8,10 @@ const FormBox = styled.form`
   dl {
     display: flex;
     align-items: center;
+    width: 500px;
 
     dt {
-      width: 120px;
+      width: 210px;
     }
 
     dd {
@@ -19,7 +21,7 @@ const FormBox = styled.form`
 
 `;
 
-const GroupRegisterForm = ({ onSubmit, }) => {
+const GroupRegisterForm = ({ form ,onSubmit, onChange}) => {
   const { t } = useTranslation();
 
   return <FormBox autoComplete="off" onSubmit={onSubmit}>
@@ -28,7 +30,8 @@ const GroupRegisterForm = ({ onSubmit, }) => {
       <dd>
       <StyledInput
       type="text"
-      name="no"
+      name="gno"
+      value={form?.gno}
       onChange={onChange}
       />
       </dd>
@@ -38,7 +41,8 @@ const GroupRegisterForm = ({ onSubmit, }) => {
       <dd>
       <StyledInput
       type="text"
-      name="name"
+      name="gname"
+      value={form?.gname}
       onChange={onChange}
       />
       </dd>
@@ -48,8 +52,10 @@ const GroupRegisterForm = ({ onSubmit, }) => {
       <dd>
       <StyledInput
       type="text"
-      name="des"
+      name="gdes"
+      value={form?.gdes}
       onChange={onChange}
+    
       />
       </dd>
     </dl>
@@ -60,6 +66,7 @@ const GroupRegisterForm = ({ onSubmit, }) => {
       <StyledInput
       type="text"
       name="cname"
+      value={form?.cname}
       onChange={onChange}
       />
       </dd>
@@ -69,7 +76,8 @@ const GroupRegisterForm = ({ onSubmit, }) => {
       <dd>
       <StyledInput
       type="text"
-      name="email"
+      name="cemail"
+      value={form?.cemail}
       onChange={onChange}
       />
       </dd>
@@ -80,6 +88,7 @@ const GroupRegisterForm = ({ onSubmit, }) => {
       <StyledInput
       type="text"
       name="sdate"
+      value={form?.sdate}
       onChange={onChange}
       />
       </dd>
@@ -90,6 +99,7 @@ const GroupRegisterForm = ({ onSubmit, }) => {
       <StyledInput
       type="text"
       name="edate"
+      value={form?.edate}
       onChange={onChange}
       />
       </dd>
@@ -100,6 +110,7 @@ const GroupRegisterForm = ({ onSubmit, }) => {
       <StyledInput
       type="text"
       name="date"
+      value={form.date}
       onChange={onChange}
       />
       </dd>
@@ -109,7 +120,7 @@ const GroupRegisterForm = ({ onSubmit, }) => {
       <dd>
       <StyledInput
       type="text"
-      name="sdate"
+      name=""
       onChange={onChange}
       />
       </dd>
@@ -118,17 +129,16 @@ const GroupRegisterForm = ({ onSubmit, }) => {
       <dt>{t('파일업로드')}</dt>
       <dd>
         <StyledInput
-        type="image"
+        type="file"
         name="file"
         onChange={onChange}
         />
       </dd>
     </dl>
-
-
-
-
+    <GroupButton>등록</GroupButton>
   </FormBox>;
+
+  
 };
 
 export default React.memo(GroupRegisterForm);
