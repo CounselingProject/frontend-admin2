@@ -4,7 +4,6 @@ import { getCommonActions } from '@/commons/contexts/CommonContext';
 
 const GroupListContainer = ({ searchParams }) => {
   const { setMenuCode, setSubMenuCode } = getCommonActions();
-
   useLayoutEffect(() => {
     setMenuCode('counseling');
     setSubMenuCode('group');

@@ -1,5 +1,11 @@
-const CounselingGroupPage = () => {
-  return <h1>집단 상담 프로그램 목록</h1>;
+import GroupListContainer from '@/counseling/containers/GroupListContainer';
+import AdminOnlyContainer from '@/member/containers/AdminOnlyContainer';
+const CounselingGroupPage = ({ searchParams }) => {
+  return (
+    <AdminOnlyContainer>
+      <GroupListContainer searchParams={searchParams} />
+    </AdminOnlyContainer>
+  );
 };
 
 export default CounselingGroupPage;
