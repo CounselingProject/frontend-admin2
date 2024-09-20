@@ -3,7 +3,7 @@ import ListContainer from '@/member/containers/ListContainer';
 const MemberListPage = () => {
   return (
     <AdminOnlyContainer>
-      <ListContainer />
+      <ListContainer searchParams={searchParams} />
     </AdminOnlyContainer>
   );
 };
