@@ -1,5 +1,10 @@
 'use client';
-import React, { useLayoutEffect, useEffect, useState, useCallback } from 'react';
+import React, {
+  useLayoutEffect,
+  useEffect,
+  useState,
+  useCallback,
+} from 'react';
 import { getCommonActions } from '@/commons/contexts/CommonContext';
 import { apiList } from '../../counseling/details/apis/apiInfo';
 import ItemsBox from '../../counseling/details/components/ItemsBox';
@@ -16,13 +21,13 @@ function getQueryString(searchParams) {
   return qs;
 }
 
-const ApplicationListContainer = ({ searchParams }) => {
+const ApplicationListContainer = ({ params, searchParams }) => {
   const { setMenuCode, setSubMenuCode } = getCommonActions();
 
   const [search, setSearch] = useState(() => getQueryString(searchParams));
   const [items, setItems] = useState([]);
   const [pagination, setPagination] = useState({});
-  const { rNo } = useParams();
+  const { rNo } = params;
 
   const { t } = useTranslation();
 
@@ -76,6 +81,5 @@ const ApplicationListContainer = ({ searchParams }) => {
     </>
   );
 };
-
 
 export default React.memo(ApplicationListContainer);
