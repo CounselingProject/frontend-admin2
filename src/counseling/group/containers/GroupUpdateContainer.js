@@ -6,7 +6,7 @@ import React, {
   useEffect,
 } from 'react';
 import { getCommonActions } from '@/commons/contexts/CommonContext';
-import GroupRegisterForm from './GroupRegisterForm';
+import GroupRegisterForm from '../components/GroupRegisterForm';
 import apiGroup from '../apis/apiGroup';
 import { useTranslation } from 'react-i18next';
 
@@ -32,7 +32,7 @@ const GroupUpdateContainer = ({ params }) => {
   }, []);
 
   const onSubmit = useCallback(
-    async (e) => {
+    (e) => {
       e.preventDefault();
 
       // 유효성 검사
@@ -57,13 +57,15 @@ const GroupUpdateContainer = ({ params }) => {
         return;
       }
 
-      try {
-        const res = await apiGroup(form);
+      (async () => {
+        try {
+          const res = await apiGroup(form);
 
-        console.log('성공:', res);
-      } catch (err) {
-        setErrors({ api: [err.message] });
-      }
+          console.log('성공:', res);
+        } catch (err) {
+          setErrors({ api: [err.message] });
+        }
+      })();
     },
     [form, t],
   );
