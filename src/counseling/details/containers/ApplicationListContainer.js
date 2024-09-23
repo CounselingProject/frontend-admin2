@@ -45,7 +45,6 @@ const ApplicationListContainer = ({ params, searchParams }) => {
       userName: '학생명',
       email: 'user01@test.org',
       rDateTime: '2024-09-24 14:00:00',
-      reason: '상담사유',
       record: '상담일지',
     },
   ]);
@@ -87,6 +86,10 @@ const ApplicationListContainer = ({ params, searchParams }) => {
     [searchTmp],
   );
 
+  const onToggle = useCallback((name, value) => {
+    setSearch((search) => ({ ...search, [name]: value }));
+  }, []);
+
   /* 페이지 변경 함수 */
   const onChangePage = useCallback((p) => {
     setSearch((search) => ({ ...search, page: p }));
@@ -107,8 +110,7 @@ const ApplicationListContainer = ({ params, searchParams }) => {
 
     if (!window.alert(t('변경되었습니다.'))) {
       return;
-    }
-    
+    }    
   }, [t]);
 
   return (
@@ -117,6 +119,7 @@ const ApplicationListContainer = ({ params, searchParams }) => {
         search={search}
         onChange={onChangeSearch}
         onSubmit={onSubmitSearch}
+        onToggle={onToggle}
       />
       <ItemsBox items={items} onChangeStatus={onChangeStatus} />
       {items?.length > 0 && (

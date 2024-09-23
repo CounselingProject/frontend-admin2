@@ -59,44 +59,45 @@ const formatDateTime = (rDateTime) => {
   const hours = date.getHours();
   const minutes = date.getMinutes();
 
-  const formattedDate = `${year}년 ${month}월 ${day}일`;
-  const formattedTime = `${hours}시 ${minutes.toString().padStart(2, '0')}분`;
+  const formattedDate = `${year}-${month}-${day}`;
+  const formattedStartTime = `${hours}:${minutes.toString().padStart(2, '0')}`;
+  const formattedEndTime = `${hours+1}:${minutes.toString().padStart(2, '0')}`;
 
-  return { formattedDate, formattedTime };
+  return { formattedDate, formattedStartTime, formattedEndTime };
 };
 
 const ItemBox = ({ item, className, onChange, onChangeStatus }) => {
-  const { formattedDate, formattedTime } = formatDateTime(item?.rDateTime);
-
   const { t } = useTranslation();
+
+  const { formattedDate, formattedStartTime, formattedEndTime } = formatDateTime(item?.rDateTime);
+
 
   return (
     <table className={className}>
       <thead className="item-title">
         <tr>
-          <th>번호</th>
+          <th>신청번호</th>
           <th>상담일</th>
           <th>상담시간</th>
           <th>신청자명</th>
           <th>상담구분</th>
           <th>상담종류</th>
           <th>상담명</th>
-          <th>상담사유</th>
+          <th>상담사명</th>
           <th>진행상태</th>
           <th>상태변경</th>
-          <th>상담일지</th>
         </tr>
       </thead>
       <tbody className="item-content">
         <tr>
           <td className="rNo">{item?.rNo}</td>
           <td className="rDate">{formattedDate}</td>
-          <td className="rTime">{formattedTime}</td>
+          <td className="rTime">{formattedStartTime}~{formattedEndTime}</td>
           <td className="userName">{item?.userName}</td>
           <td className="counselingType">{item?.counselingType}</td>
           <td className="category">{item?.category}</td>
           <td className="cName">{item?.counselingName}</td>
-          <td className="reason">{item?.reason}</td>
+          <td className="counselorName">{item?.counselorName}</td>
           <td>
             <select
               name="status"
@@ -116,11 +117,6 @@ const ItemBox = ({ item, className, onChange, onChangeStatus }) => {
                 </button>
               )}
             </StatusButtonWrapper>
-          </td>
-          <td>
-            <Link href="/">
-              <RecordButton>{t('상담일지_작성')}</RecordButton>
-            </Link>
           </td>
         </tr>
       </tbody>
