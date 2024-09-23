@@ -6,8 +6,8 @@ import React, {
   useEffect,
 } from 'react';
 import { getCommonActions } from '@/commons/contexts/CommonContext';
-import GroupRegisterForm from '../group/components/GroupRegisterForm';
-import apiGroup from '../group/apis/apiGroup';
+import GroupRegisterForm from './GroupRegisterForm';
+import apiGroup from '../apis/apiGroup';
 import { useTranslation } from 'react-i18next';
 
 const GroupUpdateContainer = ({ params }) => {
@@ -30,8 +30,6 @@ const GroupUpdateContainer = ({ params }) => {
   const onChange = useCallback((e) => {
     setForm((form) => ({ ...form, [e.target.name]: e.target.value }));
   }, []);
-
-
 
   const onSubmit = useCallback(
     async (e) => {
@@ -56,12 +54,12 @@ const GroupUpdateContainer = ({ params }) => {
 
       if (hasErrors) {
         setErrors(_errors);
-        return; 
+        return;
       }
 
       try {
         const res = await apiGroup(form);
-       
+
         console.log('성공:', res);
       } catch (err) {
         setErrors({ api: [err.message] });
