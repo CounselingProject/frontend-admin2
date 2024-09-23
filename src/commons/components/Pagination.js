@@ -43,7 +43,7 @@ const Pagination = ({ pagination, onClick }) => {
   const { page, pages, prevRangePage, nextRangePage, totalPages } = pagination;
 
   return (
-    pages.length > 0 && (
+    pages?.length > 0 && (
       <Wrapper>
         {prevRangePage > 0 && (
           <>

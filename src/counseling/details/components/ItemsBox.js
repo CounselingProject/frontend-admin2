@@ -1,51 +1,10 @@
 'use client';
 import React from 'react';
-import Link from "next/link";
+import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-import { FaRegCalendarCheck } from 'react-icons/fa';
 
-const ResaddressWithIcon = styled.h2`
-  display: flex;
-  align-items: center;
-
-  svg {
-    margin-right: 7px;
-    font-size: 1.2rem;
-  }
-
-  h2 {
-    margin: 0;
-    font-size: 1.1rem;
-    font-weight: bold;
-  }
-`;
-
-const counselingName = styled.div`
-  font-weight: bold;
-  font-size: 1.7em;
-`;
-
-const counselingInfo = styled.div`
-  font-weight: bold;
-  font-size: 1.2em;
-  color: #ff3d00;
-  margin-top: 10px;
-
-  .rDateTime,
-  .persons {
-    display: inline-block;
-    margin-right: 6px;
-  }
-`;
-
-const CounselingrNo = styled.div`
-  font-weight: bold;
-  font-size: 1em;
-  margin-bottom: 20px;
-`;
-
-const StatusAndButtonWrapper = styled.div`
+const StatusButtonWrapper = styled.div`
   display: flex;
   align-items: center;
   margin-top: 10px;
@@ -53,30 +12,30 @@ const StatusAndButtonWrapper = styled.div`
 
   .status {
     font-size: 1.1em;
-    color: #555;
+    color: #3f51b5;
     margin-right: 10px;
   }
 
   button {
     padding: 6px 12px;
-    color: #ff3d00;
-    border-color: #ff3d00;
+    color: #3f51b5;
+    border-color: #3f51b5;
     font-weight: bold;
     border-radius: 5px;
     cursor: pointer;
     font-size: 1rem;
 
     &:hover {
-      background-color: #ff3d00;
+      background-color: #3f51b5;
       color: white;
     }
   }
 `;
 
-const ReservationButton = styled.button`
+const RecordButton = styled.button`
   margin-top: 15px;
   padding: 8px 12px;
-  background-color: #ff3d00;
+  background-color: #3f51b5;
   color: white;
   border: none;
   font-weight: bold;
@@ -88,7 +47,7 @@ const ReservationButton = styled.button`
   height: 37px;
 
   &:hover {
-    background-color: #d03e12;
+    background-color: #3f51b5;
   }
 `;
 
@@ -106,47 +65,66 @@ const formatDateTime = (rDateTime) => {
   return { formattedDate, formattedTime };
 };
 
-const ItemBox = ({ item, className, onCancel }) => {
-  const url = `/apply/${item?.rNo}`;
-  const { t } = useTranslation();
-
+const ItemBox = ({ item, className, onChange, onChangeStatus }) => {
   const { formattedDate, formattedTime } = formatDateTime(item?.rDateTime);
 
+  const { t } = useTranslation();
+
   return (
-    <li className={className}>
-      <div className="item-inner">
-        <div className="item-content">
-          <CounselingrNo>
-            <div className="rNo">
-              <ResaddressWithIcon>
-                <FaRegCalendarCheck />
-                <h2>{item?.rNo}번</h2>
-              </ResaddressWithIcon>
-            </div>
-          </CounselingrNo>
-          <counselingName>
-            <div className="cName">{item?.counselingName}</div>
-          </counselingName>
-          <counselingInfo>
-            <div className="rDateTime">
-              {formattedDate} {formattedTime}
-            </div>
-            <div className="reason">{item?.reason}</div>
-          </counselingInfo>
-          <StatusAndButtonWrapper>
-            <div className="status">{item?.statusStr}</div>
-            {item && ['START', 'APPLY', 'CONFIRM'].includes(item.status) && (
-              <button type="button" onClick={() => onCancel(item.rNo)}>
-                {t('예약_취소')}
-              </button>
-            )}
-          </StatusAndButtonWrapper>
-        </div>
-      </div>
-      <Link to={url}>
-        <ReservationButton>{t('예약_정보_확인')}</ReservationButton>
-      </Link>
-    </li>
+    <table className={className}>
+      <thead className="item-title">
+        <tr>
+          <th>번호</th>
+          <th>상담일</th>
+          <th>상담시간</th>
+          <th>신청자명</th>
+          <th>상담구분</th>
+          <th>상담종류</th>
+          <th>상담명</th>
+          <th>상담사유</th>
+          <th>진행상태</th>
+          <th>상태변경</th>
+          <th>상담일지</th>
+        </tr>
+      </thead>
+      <tbody className="item-content">
+        <tr>
+          <td className="rNo">{item?.rNo}</td>
+          <td className="rDate">{formattedDate}</td>
+          <td className="rTime">{formattedTime}</td>
+          <td className="userName">{item?.userName}</td>
+          <td className="counselingType">{item?.counselingType}</td>
+          <td className="category">{item?.category}</td>
+          <td className="cName">{item?.counselingName}</td>
+          <td className="reason">{item?.reason}</td>
+          <td>
+            <select
+              name="status"
+              onChange={onChange}
+            >
+              <option value="">{item?.status}</option>
+              <option value="APPLY">{t('예약접수')}</option>
+              <option value="CANCEL">{t('예약취소')}</option>
+              <option value="DONE">{t('상담완료')}</option>
+            </select>
+          </td>
+          <td>
+            <StatusButtonWrapper>
+              {item && ['APPLY', 'CANCEL', 'DONE'].includes(item.status) && (
+                <button type="button" onClick={() => onChangeStatus(item.rNo)}>
+                  {t('상태변경')}
+                </button>
+              )}
+            </StatusButtonWrapper>
+          </td>
+          <td>
+            <Link href="/">
+              <RecordButton>{t('상담일지_작성')}</RecordButton>
+            </Link>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   );
 };
 
@@ -156,19 +134,10 @@ const ItemStyledBox = styled(ItemBox)`
   box-shadow: 2px 2px 5px #818181;
   border-radius: 5px;
 
-  .item-inner {
-    display: flex;
-    align-items: center;
-  }
-
-  .photo {
-    margin-right: 20px;
-    flex-shrink: 0;
+  .item-title {
   }
 
   .item-content {
-    width: 100%;
-    word-break: break-all;
   }
 
   a {
@@ -177,18 +146,19 @@ const ItemStyledBox = styled(ItemBox)`
   }
 `;
 
-const ItemsBox = ({ items, onCancel }) => {
-    return (
-      <ul>
-        {items && items.length > 0 ? (
-          items.map((item, index) => (
-            <ItemStyledBox key={index} item={item} onCancel={onCancel} />
-          ))
-        ) : (
-          <li>항목이 없습니다.</li>
-        )}
-      </ul>
-    );
-  };
-  
-  export default React.memo(ItemsBox);
+const ItemsBox = ({ items, onChangeStatus }) => {
+  console.log(items);
+  return (
+    <ul>
+      {items && items.length > 0 ? (
+        items.map((item, index) => (
+          <ItemStyledBox key={index} item={item} onChangeStatus={onChangeStatus} />
+        ))
+      ) : (
+        <li>항목이 없습니다.</li>
+      )}
+    </ul>
+  );
+};
+
+export default React.memo(ItemsBox);
