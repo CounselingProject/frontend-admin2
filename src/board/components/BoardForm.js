@@ -5,9 +5,16 @@ import styled from 'styled-components';
 import { StyledInput } from '@/commons/components/inputs/StyledInput';
 import { GroupButton } from '@/commons/components/buttons/GroupButton';
 import { IoIosRadioButtonOff, IoIosRadioButtonOn } from "react-icons/io";
+import FileUpload from '@/commons/components/FileUpload';
 
 const FormBox = styled.form`
-  /* 스타일 추가 가능 */
+  width: 100%; /* 폼 전체 너비 */
+  max-width: 1200px; /* 최대 너비 */
+  margin: 0 auto; /* 중앙 정렬 */
+  padding: 20px; /* 내부 여백 */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 그림자 */
+  background-color: #fff; /* 배경색 */
+  border-radius: 8px; /* 모서리 둥글게 */
 `;
 
 const RadioButtonContainer = styled.label`
@@ -51,7 +58,31 @@ const RadioButton = ({ id, name, value, checked, onChange, label }) => (
   </RadioButtonContainer>
 );
 
-const RegisterForm = ({ form, errors, onSubmit, onChange }) => {
+const StyledTable = styled.table`
+  width: 100%; /* 테이블 전체 너비 */
+  border-collapse: collapse; /* 테이블 경계 제거 */
+  margin-bottom: 30px; /* 아래 여백 */
+`;
+
+const StyledTh = styled.th`
+  padding: 3px; /* 여백 */
+  width: 20%; /* 테이블 전체 너비 */
+  background-color: #BDBDBD; /* 변경할 배경색 */
+`;
+
+const StyledTd = styled.td`
+  padding: 12px; /* 여백 */
+  border-bottom: 1px solid #e0e0e0; /* 아래 경계선 */
+  display: flex; /* 가로 정렬을 위해 flex 사용 */
+  align-items: center; /* 수직 정렬 */
+  textarea {
+    width: 100%; /* 너비를 100%로 설정 */
+    height: 100px; /* 원하는 높이로 설정 */
+    resize: vertical; /* 수직으로 크기 조정 가능 */
+  }
+`;
+
+const BoardForm = ({ form, errors, onSubmit, onChange, insertImageCallback }) => {
   const { t } = useTranslation();
 
   return (
@@ -60,11 +91,11 @@ const RegisterForm = ({ form, errors, onSubmit, onChange }) => {
       <input type="hidden" name="gid" value={form.gid} />
 
       <h2>{t('기본 설정')}</h2>
-      <table className="table_cols mb30">
+      <StyledTable>
         <tbody>
           <tr>
-            <th>{t('사용여부')}</th>
-            <td>
+            <StyledTh>{t('사용여부')}</StyledTh>
+            <StyledTd>
               <RadioButton
                 id="active_true"
                 name="active"
@@ -81,49 +112,49 @@ const RegisterForm = ({ form, errors, onSubmit, onChange }) => {
                 onChange={onChange}
                 label={t('미사용')}
               />
-            </td>
+            </StyledTd>
           </tr>
           <tr>
-            <th>{t('게시판 ID')}</th>
-            <td>
+            <StyledTh>{t('게시판 ID')}</StyledTh>
+            <StyledTd>
               <StyledInput type="text" name="bid" value={form.bid} onChange={onChange} />
               {errors.bid && <div className="error">{errors.bid}</div>}
-            </td>
+            </StyledTd>
           </tr>
           <tr>
-            <th>{t('게시판 이름')}</th>
-            <td>
+            <StyledTh>{t('게시판 이름')}</StyledTh>
+            <StyledTd>
               <StyledInput type="text" name="bName" value={form.bName} onChange={onChange} />
               {errors.bName && <div className="error">{errors.bName}</div>}
-            </td>
+            </StyledTd>
           </tr>
           <tr>
-            <th>{t('진열가중치')}</th>
-            <td>
+            <StyledTh>{t('진열가중치')}</StyledTh>
+            <StyledTd>
               <StyledInput type="number" name="listOrder" value={form.listOrder} onChange={onChange} />
-            </td>
+            </StyledTd>
           </tr>
           <tr>
-            <th>{t('1페이지 게시글 수')}</th>
-            <td>
+            <StyledTh>{t('1페이지 게시글 수')}</StyledTh>
+            <StyledTd>
               <StyledInput type="number" name="rowsPerPage" min="1" value={form.rowsPerPage} onChange={onChange} />
-            </td>
+            </StyledTd>
           </tr>
           <tr>
-            <th>{t('페이지 구간 갯수(PC)')}</th>
-            <td>
+            <StyledTh>{t('페이지 구간 갯수(PC)')}</StyledTh>
+            <StyledTd>
               <StyledInput type="number" name="pageCountPc" min="1" value={form.pageCountPc} onChange={onChange} />
-            </td>
+            </StyledTd>
           </tr>
           <tr>
-            <th>{t('페이지 구간 갯수(Mo)')}</th>
-            <td>
+            <StyledTh>{t('페이지 구간 갯수(Mo)')}</StyledTh>
+            <StyledTd>
               <StyledInput type="number" name="pageCountMobile" min="1" value={form.pageCountMobile} onChange={onChange} />
-            </td>
+            </StyledTd>
           </tr>
           <tr>
-            <th>{t('답글 사용')}</th>
-            <td>
+            <StyledTh>{t('답글 사용')}</StyledTh>
+            <StyledTd>
               <RadioButton
                 id="useReply_true"
                 name="useReply"
@@ -140,11 +171,11 @@ const RegisterForm = ({ form, errors, onSubmit, onChange }) => {
                 onChange={onChange}
                 label={t('미사용')}
               />
-            </td>
+            </StyledTd>
           </tr>
           <tr>
-            <th>{t('댓글 사용')}</th>
-            <td>
+            <StyledTh>{t('댓글 사용')}</StyledTh>
+            <StyledTd>
               <RadioButton
                 id="useComment_true"
                 name="useComment"
@@ -161,11 +192,11 @@ const RegisterForm = ({ form, errors, onSubmit, onChange }) => {
                 onChange={onChange}
                 label={t('미사용')}
               />
-            </td>
+            </StyledTd>
           </tr>
           <tr>
-            <th>{t('에디터')}</th>
-            <td>
+            <StyledTh>{t('에디터')}</StyledTh>
+            <StyledTd>
               <RadioButton
                 id="useEditor_true"
                 name="useEditor"
@@ -182,11 +213,11 @@ const RegisterForm = ({ form, errors, onSubmit, onChange }) => {
                 onChange={onChange}
                 label={t('미사용')}
               />
-            </td>
+            </StyledTd>
           </tr>
           <tr>
-            <th>{t('이미지 첨부')}</th>
-            <td>
+            <StyledTh>{t('이미지 첨부')}</StyledTh>
+            <StyledTd>
               <RadioButton
                 id="useUploadImage_true"
                 name="useUploadImage"
@@ -203,11 +234,11 @@ const RegisterForm = ({ form, errors, onSubmit, onChange }) => {
                 onChange={onChange}
                 label={t('미사용')}
               />
-            </td>
+            </StyledTd>
           </tr>
           <tr>
-            <th>{t('파일 첨부')}</th>
-            <td>
+            <StyledTh>{t('파일 첨부')}</StyledTh>
+            <StyledTd>
               <RadioButton
                 id="useUploadFile_true"
                 name="useUploadFile"
@@ -224,11 +255,11 @@ const RegisterForm = ({ form, errors, onSubmit, onChange }) => {
                 onChange={onChange}
                 label={t('미사용')}
               />
-            </td>
+            </StyledTd>
           </tr>
           <tr>
-            <th>{t('글작성 후 이동')}</th>
-            <td>
+            <StyledTh>{t('글작성 후 이동')}</StyledTh>
+            <StyledTd>
               <RadioButton
                 id="locationAfterWriting_true"
                 name="locationAfterWriting"
@@ -245,11 +276,11 @@ const RegisterForm = ({ form, errors, onSubmit, onChange }) => {
                 onChange={onChange}
                 label={t('미사용')}
               />
-            </td>
+            </StyledTd>
           </tr>
           <tr>
-            <th>{t('글보기 하단 목록 노출')}</th>
-            <td>
+            <StyledTh>{t('글보기 하단 목록 노출')}</StyledTh>
+            <StyledTd>
               <RadioButton
                 id="showListBelowView_true"
                 name="showListBelowView"
@@ -266,76 +297,153 @@ const RegisterForm = ({ form, errors, onSubmit, onChange }) => {
                 onChange={onChange}
                 label={t('미사용')}
               />
-            </td>
+            </StyledTd>
           </tr>
           <tr>
-            <th>{t('스킨')}</th>
-            <td>
-              <RadioButton
-                id="skin_true"
-                name="skin"
-                value="true"
-                checked={form.skin === 'true'}
-                onChange={onChange}
-                label={t('사용')}
-              />
-              <RadioButton
-                id="skin_false"
-                name="skin"
-                value="false"
-                checked={form.skin === 'false'}
-                onChange={onChange}
-                label={t('미사용')}
-              />
-            </td>
-          </tr>
+  <StyledTh>{t('스킨')}</StyledTh>
+  <StyledTd>
+    <RadioButton
+      id="skin_counseling"
+      name="skin"
+      value="counseling"
+      checked={form.skin === 'counseling'}
+      onChange={onChange}
+      label={t('상담 게시판')}
+    />
+    <RadioButton
+      id="skin_review"
+      name="skin"
+      value="review"
+      checked={form.skin === 'review'}
+      onChange={onChange}
+      label={t('리뷰 게시판')}
+    />
+    <RadioButton
+      id="skin_notice"
+      name="skin"
+      value="notice"
+      checked={form.skin === 'notice'}
+      onChange={onChange}
+      label={t('공지사항')}
+    />
+  </StyledTd>
+</tr>
         </tbody>
-      </table>
+      </StyledTable>
 
       <h2>{t('게시판 분류')}</h2>
-      <table className="table_cols mb30">
+      <StyledTable>
         <tbody>
           <tr>
-            <th>{t('분류')}</th>
-            <td>
-              <textarea name="category" placeholder={t('여러 분류는 줄개행하여 입력')} value={form.category} onChange={onChange}></textarea>
-            </td>
+            <StyledTh>{t('분류')}</StyledTh>
+            <StyledTd>
+              <textarea name="category" 
+              placeholder={t('여러 분류는 줄개행하여 입력')} 
+              value={form.category} 
+              onChange={onChange}>
+              </textarea>
+            </StyledTd>
           </tr>
         </tbody>
-      </table>
+      </StyledTable>
 
       <h2>{t('권한 설정')}</h2>
-      {/* 권한 설정 필드 추가... */}
+      <StyledTable className="table_cols mb30">
+        <tbody>
+          <tr>
+            <th width="180">{t('글목록')}</th>
+            <StyledTd>
+              <RadioButton id="listAccessType_ALL" name="listAccessType" value="ALL" checked={form.listAccessType === 'ALL'} onChange={onChange} label={t('비회원+학생+교수+상담사+관리자')} />
+              <RadioButton id="listAccessType_MEMBER" name="listAccessType" value="USER" checked={form.listAccessType === 'USER'} onChange={onChange} label={t('학생+교수+상담사+관리자')} />
+              <RadioButton id="listAccessType_ADMIN" name="listAccessType" value="ADMIN" checked={form.listAccessType === 'ADMIN'} onChange={onChange} label={t('관리자')} />
+            </StyledTd>
+          </tr>
+          <tr>
+            <th>{t('글보기')}</th>
+            <StyledTd>
+              <RadioButton id="viewAccessType_ALL" name="viewAccessType" value="ALL" checked={form.viewAccessType === 'ALL'} onChange={onChange} label={t('비회원+학생+교수+상담사+관리자')} />
+              <RadioButton id="viewAccessType_MEMBER" name="viewAccessType" value="USER" checked={form.viewAccessType === 'USER'} onChange={onChange} label={t('학생+교수+상담사+관리자')} />
+              <RadioButton id="viewAccessType_ADMIN" name="viewAccessType" value="ADMIN" checked={form.viewAccessType === 'ADMIN'} onChange={onChange} label={t('관리자')} />
+            </StyledTd>
+          </tr>
+          <tr>
+            <th>{t('글쓰기')}</th>
+            <StyledTd>
+              <RadioButton id="writeAccessType_ALL" name="writeAccessType" value="ALL" checked={form.writeAccessType === 'ALL'} onChange={onChange} label={t('비회원+학생+교수+상담사+관리자')} />
+              <RadioButton id="writeAccessType_MEMBER" name="writeAccessType" value="USER" checked={form.writeAccessType === 'USER'} onChange={onChange} label={t('학생+교수+상담사+관리자')} />
+              <RadioButton id="writeAccessType_ADMIN" name="writeAccessType" value="ADMIN" checked={form.writeAccessType === 'ADMIN'} onChange={onChange} label={t('관리자')} />
+            </StyledTd>
+          </tr>
+          <tr>
+            <th>{t('답글')}</th>
+            <StyledTd>
+              <RadioButton id="replyAccessType_ALL" name="replyAccessType" value="ALL" checked={form.replyAccessType === 'ALL'} onChange={onChange} label={t('비회원+학생+교수+상담사+관리자')} />
+              <RadioButton id="replyAccessType_MEMBER" name="replyAccessType" value="USER" checked={form.replyAccessType === 'USER'} onChange={onChange} label={t('학생+교수+상담사+관리자')} />
+              <RadioButton id="replyAccessType_ADMIN" name="replyAccessType" value="ADMIN" checked={form.replyAccessType === 'ADMIN'} onChange={onChange} label={t('관리자')} />
+            </StyledTd>
+          </tr>
+          <tr>
+            <th>{t('댓글')}</th>
+            <StyledTd>
+              <RadioButton id="commentAccessType_ALL" name="commentAccessType" value="ALL" checked={form.commentAccessType === 'ALL'} onChange={onChange} label={t('비회원+학생+교수+상담사+관리자')} />
+              <RadioButton id="commentAccessType_MEMBER" name="commentAccessType" value="USER" checked={form.commentAccessType === 'USER'} onChange={onChange} label={t('학생+교수+상담사+관리자')} />
+              <RadioButton id="commentAccessType_ADMIN" name="commentAccessType" value="ADMIN" checked={form.commentAccessType === 'ADMIN'} onChange={onChange} label={t('관리자')} />
+            </StyledTd>
+          </tr>
+        </tbody>
+      </StyledTable>
 
       <h2>{t('게시판 상단')}</h2>
-      <table className="table_cols mb30">
+      <StyledTable className="table_cols mb30">
         <tbody>
           <tr>
-            <th>{t('내용')}</th>
-            <td>
-              <textarea name="htmlTop" value={form.htmlTop} onChange={onChange}></textarea>
-              {/* 이미지 추가 버튼 추가... */}
-            </td>
+            <th width="180">{t('내용')}</th>
+            <StyledTd>
+              <textarea id="html_top" name="htmlTop" value={form.htmlTop} onChange={onChange}> </textarea>
+              <FileUpload
+                imageOnly={true}
+                gid={form?.gid}
+                color="primary"
+                callback={insertImageCallback}
+              >
+                {t('이미지 추가')}
+              </FileUpload>
+              {/* 추가된 이미지 파일 */}
+              <div className="uploaded_files" id="uploaded_files_html_top">
+                {/* 여기에 이미지 파일 리스트 추가 */}
+              </div>
+            </StyledTd>
           </tr>
         </tbody>
-      </table>
+      </StyledTable>
 
       <h2>{t('게시판 하단')}</h2>
-      <table className="table_cols">
+      <StyledTable className="table_cols">
         <tbody>
           <tr>
-            <th>{t('내용')}</th>
-            <td>
-              <textarea name="htmlBottom" value={form.htmlBottom} onChange={onChange}></textarea>
-              {/* 이미지 추가 버튼 추가... */}
-            </td>
+            <th width="180">{t('내용')}</th>
+            <StyledTd>
+              <textarea id="html_bottom" name="htmlBottom" value={form.htmlBottom} onChange={onChange}></textarea>
+              <FileUpload
+                imageOnly={true}
+                gid={form?.gid}
+                color="primary"
+                callback={insertImageCallback}
+              >
+                {t('이미지 추가')}
+              </FileUpload>
+              {/* 추가된 이미지 파일 */}
+              <div className="uploaded_files" id="uploaded_files_html_bottom">
+                {/* 여기에 이미지 파일 리스트 추가 */}
+              </div>
+            </StyledTd>
           </tr>
         </tbody>
-      </table>
+      </StyledTable>
 
       <GroupButton type="submit">{t('등록')}</GroupButton>
     </FormBox>
   );
 };
 
-export default React.memo(RegisterForm);
+export default React.memo(BoardForm);

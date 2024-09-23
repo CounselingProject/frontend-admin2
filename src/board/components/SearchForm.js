@@ -1,4 +1,3 @@
-// components/SearchForm.js
 import React from 'react';
 
 const SearchForm = ({ onSearch, searchParams }) => {
@@ -6,7 +5,12 @@ const SearchForm = ({ onSearch, searchParams }) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const searchData = Object.fromEntries(formData);
-    onSearch(searchData);
+
+    if (typeof onSearch === 'function') {
+      onSearch(searchData);
+    } else {
+      console.error('onSearch 함수가 전달되지 않았습니다.');
+    }
   };
 
   return (
@@ -19,7 +23,12 @@ const SearchForm = ({ onSearch, searchParams }) => {
           <option value="SUBJECT">제목</option>
           <option value="CONTENT">내용</option>
         </select>
-        <input type="text" name="skey" defaultValue={searchParams.skey} placeholder="검색어" />
+        <input
+          type="text"
+          name="skey"
+          defaultValue={searchParams.skey}
+          placeholder="검색어"
+        />
       </div>
       <button type="submit" className="btn">검색하기</button>
     </form>
