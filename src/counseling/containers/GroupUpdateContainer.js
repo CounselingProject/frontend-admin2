@@ -7,6 +7,9 @@ import React, {
 } from 'react';
 import { getCommonActions } from '@/commons/contexts/CommonContext';
 import GroupRegisterForm from '../group/components/GroupRegisterForm';
+import SubMenus from '@/outlines/SubMenus';
+import { regist, update } from '../group/apis/apiGroup';
+
 
 const GroupUpdateContainer = ({ params }) => {
   const { setMenuCode, setSubMenuCode } = getCommonActions();
@@ -50,15 +53,33 @@ const GroupUpdateContainer = ({ params }) => {
       /* 유효성 검사 끝 */
 
       // 처리
+      (async () => {
+        try {
+          const { locationAfterWriting, cNo } = GroupForm;
+          const res =
+            getSubMenus === 'register'
+              ? await regist(cNo, form)
+              : await update(cNo, form);
+
+          let url =
+            locationAfterWriting === 'list'
+              ? `/counseling/`
+              : `/counseling/info/${cNo}`;
+          navigate(url, { replace: true });
+        } catch (err) {
+          setErrors(err.message);
+        }
+      })();
 
       // 후속 처리
     },
-    [form],
+    [form, GroupForm, cNo,navigate],
   );
 
   return (
     <GroupRegisterForm
       form={form}
+      GroupForm={GroupForm}
       errors={errors}
       onChange={onChange}
       onSubmit={onSubmit}
