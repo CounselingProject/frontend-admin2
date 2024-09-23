@@ -1,6 +1,5 @@
 import React from 'react';
 
-// 회원 목록 컴포넌트
 const MemberList = ({ members }) => {
   return (
     <div>
