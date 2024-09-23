@@ -6,9 +6,9 @@ import React, {
   useCallback,
 } from 'react';
 import { getCommonActions } from '@/commons/contexts/CommonContext';
-import { apiList } from '../../counseling/details/apis/apiInfo';
-import ItemsBox from '../../counseling/details/components/ItemsBox';
-import Pagination from '../../commons/components/Pagination';
+import { apiList } from '../apis/apiInfo';
+import ItemsBox from '../components/ItemsBox';
+import Pagination from '../../../commons/components/Pagination';
 import { useTranslation } from 'react-i18next';
 
 function getQueryString(searchParams) {
@@ -32,8 +32,8 @@ const ApplicationListContainer = ({ params, searchParams }) => {
   const { t } = useTranslation();
 
   useLayoutEffect(() => {
-    setMenuCode('counseling');
-    setSubMenuCode('apply');
+    setMenuCode('application');
+    setSubMenuCode('details');
   }, [setMenuCode, setSubMenuCode]);
 
   useEffect(() => {

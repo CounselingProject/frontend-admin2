@@ -55,20 +55,17 @@ function getSubMenus(menuCode) {
         { code: 'posts', name: '게시글 관리', url: '/board/posts' },
       ];
 
-    case 'counseling': // 상담 관리
+    case 'counseling': // 집단상담 관리
       return [
-        { code: 'apply', name: '상담 접수 목록', url: '/counseling' },
-        {
-          code: 'group',
-          name: '집단 상담 프로그램 목록',
-          url: '/counseling/group',
-        },
-        {
-          code: 'register',
-          name: '집단 상담 프로그램 등록',
-          url: '/counseling/group/register',
-        },
+        { code: 'group', name: '집단 상담 프로그램 목록', url: '/counseling/group' },
+        { code: 'register', name: '집단 상담 프로그램 등록', url: '/counseling/group/register' },
       ];
+
+    case 'application': // 상담이력 관리
+    return [
+      { code: 'details', name: '상담 접수 목록', url: '/counseling/details' },
+    ];    
+
     default:
       return [];
   }
