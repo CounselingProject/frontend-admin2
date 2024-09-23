@@ -1,49 +1,53 @@
 import { GroupButton } from '@/commons/components/buttons/GroupButton';
 import { StyledInput } from '@/commons/components/inputs/StyledInput';
-import React, { useState,useEffect,useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
-import { ClassicEditor, Bold, Essentials, Italic, Mention, Paragraph, Undo ,Image, ImageInsert} from 'ckeditor5';
+import {
+  ClassicEditor,
+  Bold,
+  Essentials,
+  Italic,
+  Mention,
+  Paragraph,
+  Undo,
+  Image,
+  ImageInsert,
+} from 'ckeditor5';
 
 import 'ckeditor5/ckeditor5.css';
+import FileUpload from '@/commons/components/FileUpload';
 
 const FormBox = styled.form`
   dl {
     display: flex;
     align-items: center;
-    width: 500px;
 
     dt {
-      width: 210px;
+      width: 200px;
     }
 
     dd {
       flex-grow: 1;
     }
   }
+  dl + dl {
+    margin-top: 10px;
+  }
 `;
 
 const GroupRegisterForm = ({ form, onSubmit, onChange }) => {
   const { t } = useTranslation();
-  const [mounted, setMounted] = useState(false);
   const [editor, setEditor] = useState(null);
-  useEffect(() => {
-    setMounted(true);
-
-    return () => {
-      setMounted(false);
-    };
-  }, []);
 
   // 이미지 에디터 첨부
   const insertImageCallback = useCallback(
     (url) => {
       editor.execute('insertImage', { source: url });
     },
-    [editor]
+    [editor],
   );
-
 
   return (
     <FormBox autoComplete="off" onSubmit={onSubmit}>
@@ -72,27 +76,40 @@ const GroupRegisterForm = ({ form, onSubmit, onChange }) => {
       <dl>
         <dt>{t('집단상담 프로그램 설명')}</dt>
         <dd>
-        <CKEditor
-			editor={ ClassicEditor }
-			config={ {
-				toolbar: {
-					items: [ 'undo', 'redo', '|', 'bold', 'italic' ],
-				},
-				plugins: [
-					Bold, Essentials, Italic, Mention, Paragraph,  Undo , Image,ImageInsert
-				],
-				mention: {
-				},
-				
-			} }
-      data={form?.gdes}
-      onReady={(editor) => setEditor(editor)}
-      onChange={(_, editor) => {
-        onChange({
-          target: { name: 'content', value: editor.getData() },
-        });
-      }}
-		/>
+          <CKEditor
+            editor={ClassicEditor}
+            config={{
+              toolbar: {
+                items: ['undo', 'redo', '|', 'bold', 'italic'],
+              },
+              plugins: [
+                Bold,
+                Essentials,
+                Italic,
+                Mention,
+                Paragraph,
+                Undo,
+                Image,
+                ImageInsert,
+              ],
+              mention: {},
+            }}
+            data={form?.gdes || ''}
+            onReady={(editor) => setEditor(editor)}
+            onChange={(_, editor) => {
+              onChange({
+                target: { name: 'gdes', value: editor.getData() },
+              });
+            }}
+          />
+          <FileUpload
+            imageOnly={true}
+            gid={form?.gid}
+            color="primary"
+            callback={insertImageCallback}
+          >
+            {t('이미지_첨부')}
+          </FileUpload>
         </dd>
       </dl>
 
@@ -122,7 +139,7 @@ const GroupRegisterForm = ({ form, onSubmit, onChange }) => {
         <dt>{t('집단상담 프로그램 신청 시작일')}</dt>
         <dd>
           <StyledInput
-            type="text"
+            type="date"
             name="sdate"
             value={form?.sdate}
             onChange={onChange}
@@ -133,7 +150,7 @@ const GroupRegisterForm = ({ form, onSubmit, onChange }) => {
         <dt>{t('집단상담 프로그램 신청 종료일')}</dt>
         <dd>
           <StyledInput
-            type="text"
+            type="date"
             name="edate"
             value={form?.edate}
             onChange={onChange}
@@ -157,12 +174,7 @@ const GroupRegisterForm = ({ form, onSubmit, onChange }) => {
           <StyledInput type="text" name="" onChange={onChange} />
         </dd>
       </dl>
-      <dl>
-        <dt>{t('파일업로드')}</dt>
-        <dd>
-          <StyledInput type="file" name="file" onChange={onChange} />
-        </dd>
-      </dl>
+
       <GroupButton type="submit">등록</GroupButton>
     </FormBox>
   );
