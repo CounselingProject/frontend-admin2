@@ -8,11 +8,14 @@ import React, {
 import { getCommonActions } from '@/commons/contexts/CommonContext';
 import GroupRegisterForm from '../group/components/GroupRegisterForm';
 import apiGroup from '../group/apis/apiGroup';
+import { useTranslation } from 'react-i18next';
 
 const GroupUpdateContainer = ({ params }) => {
   const { setMenuCode, setSubMenuCode } = getCommonActions();
 
   const { cNo } = params;
+
+  const { t } = useTranslation();
 
   useLayoutEffect(() => {
     setMenuCode('counseling');
@@ -28,17 +31,19 @@ const GroupUpdateContainer = ({ params }) => {
     setForm((form) => ({ ...form, [e.target.name]: e.target.value }));
   }, []);
 
+
+
   const onSubmit = useCallback(
-    (e) => {
+    async (e) => {
       e.preventDefault();
 
       // 유효성 검사
-      const requiredFields = {
-        gno: "프로그램_번호를_입력하세요",
-        gname: '프로그램명을_입력해주세요",
-        gdes: '설명을_입력하세요',
-      };
 
+      const requiredFields = {
+        gno: t('프로그램_번호를_입력하세요'),
+        gname: t('프로그램명을_입력해주세요'),
+        gdes: t('설명을_입력하세요'),
+      };
       const _errors = {};
       let hasErrors = false;
       for (const [field, message] of Object.entries(requiredFields)) {
@@ -48,20 +53,21 @@ const GroupUpdateContainer = ({ params }) => {
           hasErrors = true;
         }
       }
-      /* 유효성 검사 끝 */
 
-      // 처리
-      (async () => {
-        try {
-          const res = await apiGroup(form);
-        } catch (err) {
-          setErrors(err.message);
-        }
-      })();
+      if (hasErrors) {
+        setErrors(_errors);
+        return; 
+      }
 
-      // 후속 처리
+      try {
+        const res = await apiGroup(form);
+       
+        console.log('성공:', res);
+      } catch (err) {
+        setErrors({ api: [err.message] });
+      }
     },
-    [form, cNo],
+    [form, t],
   );
 
   return (
