@@ -366,7 +366,7 @@ const BoardForm = ({ form, errors, onSubmit, onChange, insertImageCallback }) =>
       <StyledTable className="table_cols mb30">
         <tbody>
           <tr>
-            <StyledTh>{t('글목록')}</StyledTh>
+            <StyledTh>{t('글 목록')}</StyledTh>
             <StyledTd>
               <RadioButton id="listAccessType_ALL" name="listAccessType" value="ALL" checked={form.listAccessType === 'ALL'} onChange={onChange} label={t('비회원+학생+교수+상담사+관리자')} />
               <RadioButton id="listAccessType_MEMBER" name="listAccessType" value="USER" checked={form.listAccessType === 'USER'} onChange={onChange} label={t('학생+교수+상담사+관리자')} />
@@ -374,7 +374,7 @@ const BoardForm = ({ form, errors, onSubmit, onChange, insertImageCallback }) =>
             </StyledTd>
           </tr>
           <tr>
-            <StyledTh>{t('글보기')}</StyledTh>
+            <StyledTh>{t('글 보기')}</StyledTh>
             <StyledTd>
               <RadioButton id="viewAccessType_ALL" name="viewAccessType" value="ALL" checked={form.viewAccessType === 'ALL'} onChange={onChange} label={t('비회원+학생+교수+상담사+관리자')} />
               <RadioButton id="viewAccessType_MEMBER" name="viewAccessType" value="USER" checked={form.viewAccessType === 'USER'} onChange={onChange} label={t('학생+교수+상담사+관리자')} />
@@ -382,7 +382,7 @@ const BoardForm = ({ form, errors, onSubmit, onChange, insertImageCallback }) =>
             </StyledTd>
           </tr>
           <tr>
-            <StyledTh>{t('글쓰기')}</StyledTh>
+            <StyledTh>{t('글 쓰기')}</StyledTh>
             <StyledTd>
               <RadioButton id="writeAccessType_ALL" name="writeAccessType" value="ALL" checked={form.writeAccessType === 'ALL'} onChange={onChange} label={t('비회원+학생+교수+상담사+관리자')} />
               <RadioButton id="writeAccessType_MEMBER" name="writeAccessType" value="USER" checked={form.writeAccessType === 'USER'} onChange={onChange} label={t('학생+교수+상담사+관리자')} />
@@ -450,7 +450,7 @@ const BoardForm = ({ form, errors, onSubmit, onChange, insertImageCallback }) =>
         </tbody>
       </StyledTable>
 
-      <GroupButton type="submit">{t('등록')}</GroupButton>
+      <GroupButton type="submit" >{t('등록')}</GroupButton>
     </FormBox>
   );
 };
