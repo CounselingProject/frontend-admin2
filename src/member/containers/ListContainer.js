@@ -14,31 +14,35 @@ const MemberListContainer = ({ searchParams }) => {
   // 오류 상태
   const [error, setError] = useState(null);
 
+  // 메뉴 코드 설정
   useLayoutEffect(() => {
-    // 메뉴 코드 설정
-    setMenuCode('member');
-    setSubMenuCode('list');
+    setMenuCode('member');  // 메인 메뉴 'member' 설정
+    setSubMenuCode('list');  // 서브 메뉴 'list' 설정
   }, [setMenuCode, setSubMenuCode]);
 
+  // 회원 목록 데이터를 가져오는 함수
   useEffect(() => {
     const fetchMembers = async () => {
       try {
-        const response = await getMemberList(1, 20); // 첫 페이지, 20개 항목 조회
-        setMembers(response.data.items); // 회원 목록 설정
+        // getMemberList API 호출하여 회원 목록 가져오기
+        const response = await getMemberList(1, 20); // 1페이지, 20개 항목
+        setMembers(response.data.items); // 회원 목록을 상태에 저장
       } catch (err) {
-        setError(err.message); // 오류 메시지 설정
+        setError(err.message); // 오류 발생 시 오류 메시지 설정
       } finally {
-        setLoading(false); // 로딩 완료
+        setLoading(false); // 로딩 상태 종료
       }
     };
 
-    fetchMembers();
+    fetchMembers(); // 컴포넌트가 마운트될 때 API 호출
   }, []);
 
-  if (loading) return <div>로딩 중...</div>; // 로딩 중일 때
-  if (error) return <div>오류 발생: {error}</div>; // 오류 발생 시
+  // 로딩 상태 처리
+  if (loading) return <div>로딩 중...</div>; // 로딩 중일 때 표시
+  if (error) return <div>오류 발생: {error}</div>; // 오류 발생 시 메시지 표시
 
-  return <MemberList members={members} />; // 회원 목록 컴포넌트 렌더링
+  // 회원 목록이 로드되었을 때 MemberList 컴포넌트를 렌더링
+  return <MemberList members={members} />;
 };
 
 export default React.memo(MemberListContainer);
