@@ -1,6 +1,6 @@
 import { GroupButton } from '@/commons/components/buttons/GroupButton';
 import { StyledInput } from '@/commons/components/inputs/StyledInput';
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
@@ -23,17 +23,27 @@ const FormBox = styled.form`
   dl {
     display: flex;
     align-items: center;
+    margin-bottom: 15px;
 
     dt {
-      width: 200px;
+      width: 200px; 
+      font-weight: bold; 
     }
 
     dd {
       flex-grow: 1;
+      max-width: 100%;
+      padding: 5px; 
     }
   }
-  dl + dl {
-    margin-top: 10px;
+
+  /* CKEditor 스타일 조정 */
+  .ck-editor {
+    border: 1px solid #ccc; /* CKEditor 테두리 */
+    border-radius: 4px; /* 둥근 모서리 */
+    padding: 10px; /* 패딩 추가 */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); /* 음영 효과 */
+    margin-top: 5px; /* 레이블과 CKEditor 간 간격 */
   }
 `;
 
@@ -41,7 +51,6 @@ const GroupRegisterForm = ({ form, onSubmit, onChange }) => {
   const { t } = useTranslation();
   const [editor, setEditor] = useState(null);
 
-  // 이미지 에디터 첨부
   const insertImageCallback = useCallback(
     (url) => {
       editor.execute('insertImage', { source: url });
@@ -92,7 +101,6 @@ const GroupRegisterForm = ({ form, onSubmit, onChange }) => {
                 Image,
                 ImageInsert,
               ],
-              mention: {},
             }}
             data={form?.gdes || ''}
             onReady={(editor) => setEditor(editor)}
@@ -171,7 +179,11 @@ const GroupRegisterForm = ({ form, onSubmit, onChange }) => {
       <dl>
         <dt>{t('인원')}</dt>
         <dd>
-          <StyledInput type="text" name="" onChange={onChange} />
+          <StyledInput
+            type="text"
+            name="peopleCount" // 이름 지정
+            onChange={onChange}
+          />
         </dd>
       </dl>
 
