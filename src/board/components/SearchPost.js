@@ -8,7 +8,7 @@ const SearchContainer = styled.div`
 `;
 
 const SearchSelect = styled.select`
-    width: 150px; 
+    width: 150px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -39,7 +39,7 @@ const SearchButton = styled.button`
     }
 `;
 
-const SearchForm = ({ onSearch, searchParams }) => {
+const SearchPost = ({ onSearch, searchParams }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
@@ -57,8 +57,9 @@ const SearchForm = ({ onSearch, searchParams }) => {
             <form onSubmit={handleSubmit}>
                 <SearchSelect name="sopt" defaultValue={searchParams.sopt}>
                     <option value="ALL">통합검색</option>
-                    <option value="bid">게시판 ID</option>
-                    <option value="bName">게시판 이름</option>
+                    <option value="USERNAME">작성자</option>
+                    <option value="SUBJECT">제목</option>
+                    <option value="CONTENT">내용</option>
                 </SearchSelect>
                 <SearchInput
                     type="text"
@@ -72,4 +73,4 @@ const SearchForm = ({ onSearch, searchParams }) => {
     );
 };
 
-export default SearchForm;
+export default SearchPost;

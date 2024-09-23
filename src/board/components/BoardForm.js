@@ -10,7 +10,6 @@ import FileUpload from '@/commons/components/FileUpload';
 const FormBox = styled.form`
   width: 100%; /* 폼 전체 너비 */
   max-width: 1200px; /* 최대 너비 */
-  margin: 0 auto; /* 중앙 정렬 */
   padding: 20px; /* 내부 여백 */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 그림자 */
   background-color: #fff; /* 배경색 */
@@ -65,9 +64,11 @@ const StyledTable = styled.table`
 `;
 
 const StyledTh = styled.th`
-  padding: 3px; /* 여백 */
-  width: 20%; /* 테이블 전체 너비 */
-  background-color: #BDBDBD; /* 변경할 배경색 */
+  padding: 12px; /* 여백 */
+  background-color: #3f51b5; /* 변경할 배경색 */
+  border-bottom: 1px solid white; /* 흰색 구분 선 추가 */
+  height: 60px; /* 원하는 높이 설정 */
+  color: white; /* 글자색을 흰색으로 설정 */
 `;
 
 const StyledTd = styled.td`
@@ -75,11 +76,25 @@ const StyledTd = styled.td`
   border-bottom: 1px solid #e0e0e0; /* 아래 경계선 */
   display: flex; /* 가로 정렬을 위해 flex 사용 */
   align-items: center; /* 수직 정렬 */
+  height: 60px; /* 원하는 높이 설정 */
+  background-color: #f9f9f9; /* 배경색 추가 */
+  
   textarea {
     width: 100%; /* 너비를 100%로 설정 */
     height: 100px; /* 원하는 높이로 설정 */
     resize: vertical; /* 수직으로 크기 조정 가능 */
+    padding: 8px; /* 내부 여백 추가 */
+    border: 1px solid #ccc; /* 테두리 추가 */
+    border-radius: 4px; /* 모서리 둥글게 */
+    font-size: 14px; /* 폰트 크기 설정 */
   }
+`;
+
+const StyledFileUpload = styled(FileUpload)`
+  /* 원하는 크기와 스타일로 조정 */
+  font-size: 0.8em; /* 폰트 크기 조정 */
+  padding: 5px 10px; /* 패딩 조정 */
+  margin: 5px 0; /* 위아래 여백 조정 */
 `;
 
 const BoardForm = ({ form, errors, onSubmit, onChange, insertImageCallback }) => {
@@ -94,7 +109,7 @@ const BoardForm = ({ form, errors, onSubmit, onChange, insertImageCallback }) =>
       <StyledTable>
         <tbody>
           <tr>
-            <StyledTh>{t('사용여부')}</StyledTh>
+            <StyledTh>{t('사용 여부')}</StyledTh>
             <StyledTd>
               <RadioButton
                 id="active_true"
@@ -300,34 +315,34 @@ const BoardForm = ({ form, errors, onSubmit, onChange, insertImageCallback }) =>
             </StyledTd>
           </tr>
           <tr>
-  <StyledTh>{t('스킨')}</StyledTh>
-  <StyledTd>
-    <RadioButton
-      id="skin_counseling"
-      name="skin"
-      value="counseling"
-      checked={form.skin === 'counseling'}
-      onChange={onChange}
-      label={t('상담 게시판')}
-    />
-    <RadioButton
-      id="skin_review"
-      name="skin"
-      value="review"
-      checked={form.skin === 'review'}
-      onChange={onChange}
-      label={t('리뷰 게시판')}
-    />
-    <RadioButton
-      id="skin_notice"
-      name="skin"
-      value="notice"
-      checked={form.skin === 'notice'}
-      onChange={onChange}
-      label={t('공지사항')}
-    />
-  </StyledTd>
-</tr>
+          <StyledTh>{t('스킨')}</StyledTh>
+          <StyledTd>
+            <RadioButton
+              id="skin_counseling"
+              name="skin"
+              value="counseling"
+              checked={form.skin === 'counseling'}
+              onChange={onChange}
+              label={t('상담 게시판')}
+            />
+            <RadioButton
+              id="skin_review"
+              name="skin"
+              value="review"
+              checked={form.skin === 'review'}
+              onChange={onChange}
+              label={t('리뷰 게시판')}
+            />
+            <RadioButton
+              id="skin_notice"
+              name="skin"
+              value="notice"
+              checked={form.skin === 'notice'}
+              onChange={onChange}
+              label={t('공지사항')}
+            />
+          </StyledTd>
+          </tr>
         </tbody>
       </StyledTable>
 
@@ -351,7 +366,7 @@ const BoardForm = ({ form, errors, onSubmit, onChange, insertImageCallback }) =>
       <StyledTable className="table_cols mb30">
         <tbody>
           <tr>
-            <th width="180">{t('글목록')}</th>
+            <StyledTh>{t('글목록')}</StyledTh>
             <StyledTd>
               <RadioButton id="listAccessType_ALL" name="listAccessType" value="ALL" checked={form.listAccessType === 'ALL'} onChange={onChange} label={t('비회원+학생+교수+상담사+관리자')} />
               <RadioButton id="listAccessType_MEMBER" name="listAccessType" value="USER" checked={form.listAccessType === 'USER'} onChange={onChange} label={t('학생+교수+상담사+관리자')} />
@@ -359,7 +374,7 @@ const BoardForm = ({ form, errors, onSubmit, onChange, insertImageCallback }) =>
             </StyledTd>
           </tr>
           <tr>
-            <th>{t('글보기')}</th>
+            <StyledTh>{t('글보기')}</StyledTh>
             <StyledTd>
               <RadioButton id="viewAccessType_ALL" name="viewAccessType" value="ALL" checked={form.viewAccessType === 'ALL'} onChange={onChange} label={t('비회원+학생+교수+상담사+관리자')} />
               <RadioButton id="viewAccessType_MEMBER" name="viewAccessType" value="USER" checked={form.viewAccessType === 'USER'} onChange={onChange} label={t('학생+교수+상담사+관리자')} />
@@ -367,7 +382,7 @@ const BoardForm = ({ form, errors, onSubmit, onChange, insertImageCallback }) =>
             </StyledTd>
           </tr>
           <tr>
-            <th>{t('글쓰기')}</th>
+            <StyledTh>{t('글쓰기')}</StyledTh>
             <StyledTd>
               <RadioButton id="writeAccessType_ALL" name="writeAccessType" value="ALL" checked={form.writeAccessType === 'ALL'} onChange={onChange} label={t('비회원+학생+교수+상담사+관리자')} />
               <RadioButton id="writeAccessType_MEMBER" name="writeAccessType" value="USER" checked={form.writeAccessType === 'USER'} onChange={onChange} label={t('학생+교수+상담사+관리자')} />
@@ -375,7 +390,7 @@ const BoardForm = ({ form, errors, onSubmit, onChange, insertImageCallback }) =>
             </StyledTd>
           </tr>
           <tr>
-            <th>{t('답글')}</th>
+            <StyledTh>{t('답글')}</StyledTh>
             <StyledTd>
               <RadioButton id="replyAccessType_ALL" name="replyAccessType" value="ALL" checked={form.replyAccessType === 'ALL'} onChange={onChange} label={t('비회원+학생+교수+상담사+관리자')} />
               <RadioButton id="replyAccessType_MEMBER" name="replyAccessType" value="USER" checked={form.replyAccessType === 'USER'} onChange={onChange} label={t('학생+교수+상담사+관리자')} />
@@ -383,7 +398,7 @@ const BoardForm = ({ form, errors, onSubmit, onChange, insertImageCallback }) =>
             </StyledTd>
           </tr>
           <tr>
-            <th>{t('댓글')}</th>
+            <StyledTh>{t('댓글')}</StyledTh>
             <StyledTd>
               <RadioButton id="commentAccessType_ALL" name="commentAccessType" value="ALL" checked={form.commentAccessType === 'ALL'} onChange={onChange} label={t('비회원+학생+교수+상담사+관리자')} />
               <RadioButton id="commentAccessType_MEMBER" name="commentAccessType" value="USER" checked={form.commentAccessType === 'USER'} onChange={onChange} label={t('학생+교수+상담사+관리자')} />
@@ -397,9 +412,9 @@ const BoardForm = ({ form, errors, onSubmit, onChange, insertImageCallback }) =>
       <StyledTable className="table_cols mb30">
         <tbody>
           <tr>
-            <th width="180">{t('내용')}</th>
+            <StyledTh>{t('내용')}</StyledTh>
             <StyledTd>
-              <textarea id="html_top" name="htmlTop" value={form.htmlTop} onChange={onChange}> </textarea>
+              <textarea id="html_top" name="htmlTop" value={form.htmlTop} onChange={onChange}></textarea>
               <FileUpload
                 imageOnly={true}
                 gid={form?.gid}
@@ -408,10 +423,7 @@ const BoardForm = ({ form, errors, onSubmit, onChange, insertImageCallback }) =>
               >
                 {t('이미지 추가')}
               </FileUpload>
-              {/* 추가된 이미지 파일 */}
-              <div className="uploaded_files" id="uploaded_files_html_top">
-                {/* 여기에 이미지 파일 리스트 추가 */}
-              </div>
+              <div className="uploaded_files" id="uploaded_files_html_top"></div>
             </StyledTd>
           </tr>
         </tbody>
@@ -421,7 +433,7 @@ const BoardForm = ({ form, errors, onSubmit, onChange, insertImageCallback }) =>
       <StyledTable className="table_cols">
         <tbody>
           <tr>
-            <th width="180">{t('내용')}</th>
+            <StyledTh>{t('내용')}</StyledTh>
             <StyledTd>
               <textarea id="html_bottom" name="htmlBottom" value={form.htmlBottom} onChange={onChange}></textarea>
               <FileUpload
@@ -432,10 +444,7 @@ const BoardForm = ({ form, errors, onSubmit, onChange, insertImageCallback }) =>
               >
                 {t('이미지 추가')}
               </FileUpload>
-              {/* 추가된 이미지 파일 */}
-              <div className="uploaded_files" id="uploaded_files_html_bottom">
-                {/* 여기에 이미지 파일 리스트 추가 */}
-              </div>
+              <div className="uploaded_files" id="uploaded_files_html_bottom"></div>
             </StyledTd>
           </tr>
         </tbody>

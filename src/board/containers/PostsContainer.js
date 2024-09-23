@@ -2,7 +2,6 @@
 import React, { useLayoutEffect } from 'react';
 import { getCommonActions } from '@/commons/contexts/CommonContext';
 import PostForm from '../components/PostForm';
-import PostList from '../components/PostList';
 
 const PostsContainer = ({ searchParams }) => {
     const { setMenuCode, setSubMenuCode } = getCommonActions();
@@ -15,8 +14,7 @@ const PostsContainer = ({ searchParams }) => {
     return (
         <section>
             <h1>게시판 등록/수정</h1>
-            <PostForm />
-            <PostList searchParams={searchParams} />
+            <PostForm searchParams={searchParams} />
         </section>
     );
 };
