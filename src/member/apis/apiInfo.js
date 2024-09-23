@@ -1,4 +1,6 @@
+import apiRequest from '@/commons/libs/apiRequest';
 import requestData from '@/commons/libs/requestData';
+import cookies from 'react-cookies';
 
 // 교수 목록 키워드 검색
 export const getProfessors = (skey) =>
