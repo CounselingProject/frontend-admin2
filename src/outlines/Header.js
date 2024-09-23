@@ -4,13 +4,21 @@ import cookies from 'react-cookies';
 import { useTranslation } from 'react-i18next';
 import { getCommonStates } from '../commons/contexts/CommonContext';
 import { getUserContext } from '@/commons/contexts/UserInfoContext';
+
 const HeaderBox = styled.header`
   .site-top {
     background: ${({ theme }) => theme.colors.white};
-    height: 65px;
+    height: 80px; /* 헤더 높이를 늘림 */
 
     div {
-      text-align: right;
+      display: flex;
+      align-items: center; /* 수직 정렬 */
+      justify-content: space-between; /* 공간 분배 */
+      padding: 0 20px;
+
+      img {
+        height: 60px; /* 이미지 높이 조정 */
+      }
 
       a {
         display: inline-block;
@@ -30,9 +38,10 @@ const Header = () => {
   const { t } = useTranslation();
   const { showHeader } = getCommonStates();
   const {
-    states: { isLogin, userInfo, isAdmin },
+    states: { isLogin, userInfo },
     actions: { setIsLogin, setIsAdmin, setUserInfo },
   } = getUserContext();
+
   const onLogout = useCallback(() => {
     setIsLogin(false);
     setIsAdmin(false);
@@ -45,9 +54,10 @@ const Header = () => {
       <HeaderBox>
         <section className="site-top">
           <div className="layout-width">
+            <img src="/path/to/your/logo.png" alt="충청대학교 로고" />{' '}
+            {/* 로고 이미지 추가 */}
             {isLogin ? (
               <>
-                {/* 로그인 상태 */}
                 <span>
                   {userInfo?.userName}({userInfo?.email}){t('님_로그인')}
                 </span>
