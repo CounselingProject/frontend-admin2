@@ -7,9 +7,7 @@ import React, {
 } from 'react';
 import { getCommonActions } from '@/commons/contexts/CommonContext';
 import GroupRegisterForm from '../group/components/GroupRegisterForm';
-import SubMenus from '@/outlines/SubMenus';
-import { regist, update } from '../group/apis/apiGroup';
-
+import apiGroup from '../group/apis/apiGroup';
 
 const GroupUpdateContainer = ({ params }) => {
   const { setMenuCode, setSubMenuCode } = getCommonActions();
@@ -36,9 +34,9 @@ const GroupUpdateContainer = ({ params }) => {
 
       // 유효성 검사
       const requiredFields = {
-        gno: t('프로그램_번호를_입력하세요'),
-        gname: t('프로그램명을_입력해주세요'),
-        gdes: t('설명을_입력하세요'),
+        gno: "프로그램_번호를_입력하세요",
+        gname: '프로그램명을_입력해주세요",
+        gdes: '설명을_입력하세요',
       };
 
       const _errors = {};
@@ -55,17 +53,7 @@ const GroupUpdateContainer = ({ params }) => {
       // 처리
       (async () => {
         try {
-          const { locationAfterWriting, cNo } = GroupForm;
-          const res =
-            getSubMenus === 'register'
-              ? await regist(cNo, form)
-              : await update(cNo, form);
-
-          let url =
-            locationAfterWriting === 'list'
-              ? `/counseling/`
-              : `/counseling/info/${cNo}`;
-          navigate(url, { replace: true });
+          const res = await apiGroup(form);
         } catch (err) {
           setErrors(err.message);
         }
@@ -73,13 +61,12 @@ const GroupUpdateContainer = ({ params }) => {
 
       // 후속 처리
     },
-    [form, GroupForm, cNo,navigate],
+    [form, cNo],
   );
 
   return (
     <GroupRegisterForm
       form={form}
-      GroupForm={GroupForm}
       errors={errors}
       onChange={onChange}
       onSubmit={onSubmit}
