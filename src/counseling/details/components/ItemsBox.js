@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import counselingType from '../../constants/counselingType';
 import personalCategory from '../../constants/personalCategory';
 import status from '../../constants/status';
-import { IoMdRadioButtonOn, IoMdRadioButtonOff } from 'react-icons/io';
 
 const StatusButtonWrapper = styled.div`
   display: flex;
@@ -80,7 +79,7 @@ const ItemBox = ({ item, className, onChange, onChangeStatus }) => {
 
   return (
     <table className={className}>
-      <thead className="item-title">
+      <thead>
         <tr>
           <th>신청번호</th>
           <th>상담일</th>
@@ -95,7 +94,7 @@ const ItemBox = ({ item, className, onChange, onChangeStatus }) => {
           <th>상담일지</th>
         </tr>
       </thead>
-      <tbody className="item-content">
+      <tbody>
         <tr>
           <td className="rNo">{item?.rNo}</td>
           <td className="rDate">{formattedDate}</td>
@@ -156,10 +155,24 @@ const ItemStyledBox = styled(ItemBox)`
   box-shadow: 2px 2px 5px #818181;
   border-radius: 5px;
 
-  .item-title {
+  width: 80%;
+  margin: auto;
+
+  table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
   }
 
-  .item-content {
+  thead, tbody {
+    width: 100%;
+  }
+
+  th, td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    width: auto;
   }
 
   a {
