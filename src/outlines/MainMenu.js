@@ -51,13 +51,13 @@ const MainMenu = () => {
           href="/counseling/group"
           className={classNames({ on: menuCode === 'counseling' })}
         >
-          {t('집단상담관리')}
+          {t('집단상담 관리')}
         </a>
         <a
           href="/counseling/details"
           className={classNames({ on: menuCode === 'application' })}
         >
-          {t('상담이력관리')}
+          {t('상담이력 관리')}
         </a>
       </Menus>
     )

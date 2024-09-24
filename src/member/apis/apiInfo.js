@@ -3,14 +3,8 @@ import requestData from '@/commons/libs/requestData';
 import cookies from 'react-cookies';
 
 // 교수 목록 키워드 검색
-export const getProfessors = (skey) =>
-  requestData(`/member/account/professors?skey=${skey?.trim()}`);
-
-// 인증(로그인)한 회원 정보 조회
-export const getMemberInfo = () =>
-  requestData('/member/account', {
-    method: 'GET',
-  });
+// export const getProfessors = (skey) =>
+//   requestData(`/member/account/professors?skey=${skey?.trim()}`);
 
 // 회원정보 수정
 export const updateMemberInfo = async (form) => {
@@ -22,12 +16,6 @@ export const updateMemberInfo = async (form) => {
     },
   });
 };
-
-// 상담원 랜덤 조회
-export const getRandomCounselor = () =>
-  requestData('/member/account/counselor', {
-    method: 'GET',
-  });
 
 // 회원 목록 조회
 export const getMemberList = (page = 1, limit = 20, sopt = 'ALL', skey) =>
