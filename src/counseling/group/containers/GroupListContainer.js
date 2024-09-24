@@ -1,12 +1,13 @@
 'use client';
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState, useCallback } from 'react';
 import { getCommonActions } from '@/commons/contexts/CommonContext';
 import getQueryString from '@/commons/libs/getQueryString';
 import GroupListItem from '../components/GroupListItem';
 import Pagination from '@/commons/components/Pagination';
+import { getGroupList } from '../apis/apiGroup';
 
 
-const GroupListContainer = ({ searchParams }) => {
+const GroupListContainer = ({ params, searchParams }) => {
   const [pagination, setPagination] = useState(null);
   const { setMenuCode, setSubMenuCode } = getCommonActions();
   const [search, setSearch] = useState(() => getQueryString(searchParams)); // 검색 시 쿼리스트링 값 나오게끔
@@ -22,10 +23,31 @@ const GroupListContainer = ({ searchParams }) => {
     },
   ]);
 
+  const { cNo } = params;
+
   useLayoutEffect(() => {
     setMenuCode('counseling');
     setSubMenuCode('group');
   }, [setMenuCode, setSubMenuCode]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        
+        const { items, pagination } = await getGroupList(cNo);
+        setItems(items);
+        setPagination(pagination);
+        setLoading(false);
+      } catch (err) {
+        console.error(err);
+      }
+    })();
+  }, [cNo]);
+
+
+  const onChangePage = useCallback((p) => {
+    setSearch((search) => ({ ...search, page: p }));
+  }, []);
 
 
   return (
