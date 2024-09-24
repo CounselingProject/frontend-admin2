@@ -23,7 +23,7 @@ const GroupListContainer = ({ params, searchParams }) => {
     },
   ]);
 
-  const { cNo } = params;
+
 
   useLayoutEffect(() => {
     setMenuCode('counseling');
@@ -42,7 +42,7 @@ const GroupListContainer = ({ params, searchParams }) => {
         console.error(err);
       }
     })();
-  }, [cNo]);
+  }, []);
 
 
   const onChangePage = useCallback((p) => {

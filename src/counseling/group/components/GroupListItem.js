@@ -9,19 +9,12 @@ const Wrapper = styled.ul`
   width: 100%;
   height: 100px;
   padding: 20px;
-  background-color: #f5f5f5; /* 배경을 핑크색으로 */
+  background-color: #f5f5f5;
   margin: 0 auto;
 `;
 
-const GroupListItem = ({ items, className }) => {
+const GroupListItem = ({ item, className }) => {
   const { t } = useTranslation();
-  const {
-    cNo,
-    counselingName,
-    reservationSdate,
-    reservationEdate,
-    counselingLimit,
-  } = items;
 
   return (
     <div>
@@ -38,23 +31,23 @@ const GroupListItem = ({ items, className }) => {
           <div className="info-box">
             <dl className="cNo">
               <dt>{t('집단상담프로그램 번호')}</dt>
-              <dd>{cNo}</dd>
+              <dd>{item?.cNo}</dd>
             </dl>
             <dl className="counselingName">
               <dt>{t('집단상담프로그램명')}</dt>
-              <dd>{counselingName}</dd>
+              <dd>{item?.counselingName}</dd>
             </dl>
             <dl className="reservationSdate">
               <dt>{t('신청시작일')}</dt>
-              <dd>{reservationSdate}</dd>
+              <dd>{item.reservationSdate}</dd>
             </dl>
             <dl className="reservationEdate">
               <dt>{t('신청종료일')}</dt>
-              <dd>{reservationEdate}</dd>
+              <dd>{item?.reservationEdate}</dd>
             </dl>
             <dl className="counselingLimit">
               <dt>{t('인원수')}</dt>
-              <dd>{counselingLimit}</dd>
+              <dd>{item?.counselingLimit}</dd>
             </dl>
           </div>
         </li>
