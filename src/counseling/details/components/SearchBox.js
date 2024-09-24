@@ -105,7 +105,7 @@ const SearchBox = ({ search, onChange, onSubmit, onToggle }) => {
             {t('예약접수')}
           </span>
           <span onClick={() => onToggle('status', 'CANCEL')}>
-            {search?.gender === 'CANCEL' ? (
+            {search?.status === 'CANCEL' ? (
               <IoMdRadioButtonOn />
             ) : (
               <IoMdRadioButtonOff />
@@ -113,7 +113,7 @@ const SearchBox = ({ search, onChange, onSubmit, onToggle }) => {
             {t('예약취소')}
           </span>
           <span onClick={() => onToggle('status', 'DONE')}>
-            {search?.gender === 'DONE' ? (
+            {search?.status === 'DONE' ? (
               <IoMdRadioButtonOn />
             ) : (
               <IoMdRadioButtonOff />
