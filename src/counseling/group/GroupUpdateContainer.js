@@ -8,6 +8,7 @@ import React, {
 import { getCommonActions } from '@/commons/contexts/CommonContext';
 import { useTranslation } from 'react-i18next';
 import GroupRegisterForm from '../components/GroupRegisterForm';
+import { deleteFile } from '@/commons/libs/apiFile';
 
 const GroupUpdateContainer = ({ params }) => {
   const { setMenuCode, setSubMenuCode, setMainTitle } = getCommonActions();
@@ -59,12 +60,47 @@ const GroupUpdateContainer = ({ params }) => {
     [form, t],
   );
 
+  const onFileDelete = useCallback(
+    (seq) => {
+      if (!confirm(t('정말_삭제하겠습니까?'))) {
+        return;
+      }
+
+      (async () => {
+        try {
+          await deleteFile(seq);
+
+          let editorImages = form?.editorImages;
+          if (!editorImages) {
+            return;
+          }
+
+          editorImages = editorImages.filter((file) => file.seq !== seq);
+          setForm((form) => ({ ...form, editorImages }));
+        } catch (err) {
+          console.error(err);
+        }
+      })();
+    },
+    [form, t],
+  );
+
+const onClick = useCallback((counselor) => {
+  setForm(form => ({
+    ...form, counselorName: counselor.userName,
+    counselorEmail: counselor.email,
+    counselor,
+  }))
+})
+
   return (
     <GroupRegisterForm
       form={form}
       errors={errors}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFileDelete={onFileDelete}
+      onClick={onClick}
     />
   );
 };

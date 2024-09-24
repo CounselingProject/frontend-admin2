@@ -5,7 +5,9 @@ import { StyledInput } from '@/commons/components/inputs/StyledInput';
 import { StyledButton } from '@/commons/components/buttons/StyledButton';
 import { useTranslation } from 'react-i18next';
 import FileUpload from '@/commons/components/FileUpload';
+import FileItems from '@/commons/components/FileItems';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
+import StyledMessage from '@/commons/components/StyledMessage';
 import {
   ClassicEditor,
   Bold,
@@ -48,15 +50,31 @@ const FormBox = styled.form`
   }
 `;
 
-const GroupRegisterForm = ({ form, errors, onChange, onSubmit }) => {
+const GroupRegisterForm = ({
+  form,
+  errors,
+  onChange,
+  onSubmit,
+  onFileDelete,
+}) => {
   const { t } = useTranslation();
   const [editor, setEditor] = useState(null);
 
   const insertImageCallback = useCallback(
-    (url) => {
-      editor.execute('insertImage', { source: url });
+    (files) => {
+      if (!files || files.length === 0) {
+        return;
+      }
+
+      const source = files.map((file) => file.fileUrl);
+
+      editor.execute('insertImage', { source });
+
+      const editorImages = form?.editorImages ?? [];
+      editorImages.push(...files);
+      onChange({ target: { name: 'editorImages', value: editorImages } });
     },
-    [editor],
+    [editor, form, onChange],
   );
 
   return (
@@ -66,8 +84,8 @@ const GroupRegisterForm = ({ form, errors, onChange, onSubmit }) => {
         <dd>
           <StyledInput
             type="text"
-            name="gno"
-            value={form?.gno}
+            name="cno"
+            value={form?.cno}
             onChange={onChange}
           />
         </dd>
@@ -78,7 +96,7 @@ const GroupRegisterForm = ({ form, errors, onChange, onSubmit }) => {
           <StyledInput
             type="text"
             name="gname"
-            value={form?.gname}
+            value={form?.counselingName}
             onChange={onChange}
           />
         </dd>
@@ -119,6 +137,18 @@ const GroupRegisterForm = ({ form, errors, onChange, onSubmit }) => {
           >
             {t('이미지_첨부')}
           </FileUpload>
+          {form?.editorImages && (
+            <FileItems files={form.editorImages} onDelete={onFileDelete} />
+          )}
+        </dd>
+      </dl>
+      
+      <dl>
+        <dt>{t('상담사_선택')}</dt>
+        <dd>
+          <StyledInput
+          
+          />
         </dd>
       </dl>
 
@@ -128,7 +158,7 @@ const GroupRegisterForm = ({ form, errors, onChange, onSubmit }) => {
           <StyledInput
             type="text"
             name="cname"
-            value={form?.cname}
+            value={form?.counselorName}
             onChange={onChange}
           />
         </dd>
@@ -139,7 +169,7 @@ const GroupRegisterForm = ({ form, errors, onChange, onSubmit }) => {
           <StyledInput
             type="text"
             name="cemail"
-            value={form?.cemail}
+            value={form?.counselorEmail}
             onChange={onChange}
           />
         </dd>
@@ -150,7 +180,7 @@ const GroupRegisterForm = ({ form, errors, onChange, onSubmit }) => {
           <StyledInput
             type="date"
             name="sdate"
-            value={form?.sdate}
+            value={form?.reservationSdate}
             onChange={onChange}
           />
         </dd>
@@ -161,7 +191,7 @@ const GroupRegisterForm = ({ form, errors, onChange, onSubmit }) => {
           <StyledInput
             type="date"
             name="edate"
-            value={form?.edate}
+            value={form?.reservationEdate}
             onChange={onChange}
           />
         </dd>
@@ -170,9 +200,9 @@ const GroupRegisterForm = ({ form, errors, onChange, onSubmit }) => {
         <dt>{t('상담일시')}</dt>
         <dd>
           <StyledInput
-            type="text"
+            type="date"
             name="date"
-            value={form.date}
+            value={form.counselingDate ?? ''}
             onChange={onChange}
           />
         </dd>
@@ -180,14 +210,14 @@ const GroupRegisterForm = ({ form, errors, onChange, onSubmit }) => {
       <dl>
         <dt>{t('인원')}</dt>
         <dd>
-          <StyledInput
-            type="text"
-            name="peopleCount" // 이름 지정
-            onChange={onChange}
-          />
+          <select name="counselingLimit">
+          
+          </select>
+         
         </dd>
       </dl>
       <StyledButton variant="primary">{t('등록')}</StyledButton>
+  <StyledMessage variant="danger">{errors.global}</StyledMessage>
     </FormBox>
   );
 };
