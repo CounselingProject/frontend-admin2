@@ -29,25 +29,25 @@ const GroupListItem = ({ item, className }) => {
             />
           </div>
           <div className="info-box">
-            <dl className="cNo">
+            <dl>
               <dt>{t('집단상담프로그램 번호')}</dt>
-              <dd>{item?.cNo}</dd>
+              <dd className="cNo">{item?.cNo}</dd>
             </dl>
-            <dl className="counselingName">
+            <dl>
               <dt>{t('집단상담프로그램명')}</dt>
-              <dd>{item?.counselingName}</dd>
+              <dd className="counselingName">{item?.counselingName}</dd>
             </dl>
-            <dl className="reservationSdate">
+            <dl>
               <dt>{t('신청시작일')}</dt>
-              <dd>{item.reservationSdate}</dd>
+              <dd className="reservationSdate">{item?.reservationSdate}</dd>
             </dl>
-            <dl className="reservationEdate">
+            <dl>
               <dt>{t('신청종료일')}</dt>
-              <dd>{item?.reservationEdate}</dd>
+              <dd className="reservationEdate">{item?.reservationEdate}</dd>
             </dl>
-            <dl className="counselingLimit">
+            <dl>
               <dt>{t('인원수')}</dt>
-              <dd>{item?.counselingLimit}</dd>
+              <dd className="counselingLimit">{item?.counselingLimit}</dd>
             </dl>
           </div>
         </li>
@@ -55,5 +55,33 @@ const GroupListItem = ({ item, className }) => {
     </div>
   );
 };
+
+const GroupBox = styled(GroupListItem)`
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 2px 2px 5px #818181;
+  border-radius: 5px;
+
+
+`
+
+const ItemsBox = ({ items }) => {
+  console.log(items);
+  return (
+    <ul>
+      {items && items.length > 0 ? (
+        items.map((item,index ) => (
+         <GroupBox
+         key={index}
+         item={item}
+         />
+        ))
+      ) : (
+        <li>항목이 없습니다.</li>
+      )}
+    </ul>
+  );
+};
+
 
 export default React.memo(GroupListItem);
