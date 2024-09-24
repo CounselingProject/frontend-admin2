@@ -41,10 +41,10 @@ const RecordButton = styled.button`
   font-weight: bold;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 1.1rem;
+  font-size: 1rem;
   text-align: center;
   width: 100%;
-  height: 37px;
+  height: 32px;
 
   &:hover {
     background-color: #3f51b5;
@@ -86,6 +86,7 @@ const ItemBox = ({ item, className, onChange, onChangeStatus }) => {
           <th>상담사명</th>
           <th>진행상태</th>
           <th>상태변경</th>
+          <th>상담일지</th>
         </tr>
       </thead>
       <tbody className="item-content">
@@ -117,6 +118,11 @@ const ItemBox = ({ item, className, onChange, onChangeStatus }) => {
                 </button>
               )}
             </StatusButtonWrapper>
+          </td>
+          <td>
+            <Link href="/">
+                <RecordButton>{t('상담일지_작성')}</RecordButton>
+            </Link>
           </td>
         </tr>
       </tbody>
