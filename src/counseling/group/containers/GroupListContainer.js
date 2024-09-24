@@ -2,6 +2,8 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { getCommonActions } from '@/commons/contexts/CommonContext';
 import getQueryString from '@/commons/libs/getQueryString';
+import GroupListItem from '../components/GroupListItem';
+import Pagination from '@/commons/components/Pagination';
 
 
 const GroupListContainer = ({ searchParams }) => {
@@ -16,7 +18,6 @@ const GroupListContainer = ({ searchParams }) => {
       counselorEmail: "user003@test.org",
       reservationSdate : "2024-09-23",
       reservationEdate  : "2024-09-24",
-      counselingDate : "2024-10-10 09:00",
       counselingLimit : 10,
     },
   ]);
@@ -29,7 +30,12 @@ const GroupListContainer = ({ searchParams }) => {
 
   return (
 
-    <></>
+    <>
+    <GroupListItem items={items}/>
+    {items.length > 0 && (
+        <Pagination onClick={onChangePage} pagination={pagination} />
+      )}
+    </>
   )
 
 };

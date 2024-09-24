@@ -8,17 +8,13 @@ import { getUserContext } from '@/commons/contexts/UserInfoContext';
 const HeaderBox = styled.header`
   .site-top {
     background: ${({ theme }) => theme.colors.white};
-    height: 80px; /* 헤더 높이를 늘림 */
+    height: 80px;
 
     div {
       display: flex;
-      align-items: center; /* 수직 정렬 */
-      justify-content: space-between; /* 공간 분배 */
+      align-items: center; 
+      justify-content: space-between; 
       padding: 0 20px;
-
-      img {
-        height: 60px; /* 이미지 높이 조정 */
-      }
 
       a {
         display: inline-block;
@@ -54,8 +50,7 @@ const Header = () => {
       <HeaderBox>
         <section className="site-top">
           <div className="layout-width">
-            <img src="/path/to/your/logo.png" alt="충청대학교 로고" />{' '}
-            {/* 로고 이미지 추가 */}
+          
             {isLogin ? (
               <>
                 <span>
