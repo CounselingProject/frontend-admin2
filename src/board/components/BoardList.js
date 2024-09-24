@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import SearchForm from './SearchForm';
-import Link from 'next/link'; // Next.js의 Link 컴포넌트 사용
+import Link from 'next/link';
 
 const exampleBoardData = [
-    { bid: 'counseling', bName: '상담 게시판', active: true, listOrder: 0 },
-    { bid: 'review', bName: '상담 일지', active: true, listOrder: 1 },
-    { bid: 'notice', bName: '공지사항', active: true, listOrder: 2 },
+    { bid: 'counselingboard', bName: '상담 게시판', active: true, listOrder: 0 },
+    { bid: 'reviewboard', bName: '상담 일지', active: true, listOrder: 1 },
+    { bid: 'noticeboard', bName: '공지사항', active: true, listOrder: 2 },
 ];
 
 const StyledTable = styled.table`
@@ -16,28 +16,28 @@ const StyledTable = styled.table`
 `;
 
 const StyledThead = styled.thead`
-    background-color: #3f51b5; /* 파란색 배경 */
+    background-color: #3f51b5;
 `;
 
 const StyledTh = styled.th`
     padding: 12px;
-    color: white; /* 글자 색상 흰색 */
-    text-align: center; /* 가운데 정렬 */
-    border-right: 1px solid white; /* 세로 구분선 */
+    color: white;
+    text-align: center;
+    border-right: 1px solid white;
 
     &:last-child {
-        border-right: none; /* 마지막 셀 오른쪽 경계선 없애기 */
+        border-right: none;
     }
 `;
 
 const StyledTd = styled.td`
     padding: 12px;
-    border-bottom: 1px solid white; /* 하단 구분선 */
-    border-right: 1px solid white; /* 세로 구분선 */
-    text-align: center; /* 가운데 정렬 */
+    border-bottom: 1px solid white;
+    border-right: 1px solid white;
+    text-align: center;
 
     &:last-child {
-        border-right: none; /* 마지막 셀 오른쪽 경계선 없애기 */
+        border-right: none;
     }
 
     button {

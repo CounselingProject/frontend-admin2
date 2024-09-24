@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-import SearchPost from './SearchPost'; // SearchPost 컴포넌트 임포트
+import SearchPost from './SearchPost';
 
 const FormBox = styled.div`
   width: 100%;
@@ -13,44 +13,44 @@ const FormBox = styled.div`
 `;
 
 const StyledTable = styled.table`
-  width: 100%; /* 테이블이 가로로 꽉 차게 */
+  width: 100%;
   border-collapse: collapse;
   margin-bottom: 30px;
 `;
 
 const StyledThead = styled.thead`
-  background-color: #3f51b5; /* 파란색 배경 */
+  background-color: #3f51b5;
 `;
 
 const StyledTh = styled.th`
   padding: 12px;
-  color: white; /* 글자 색상 흰색 */
-  text-align: center; /* 가운데 정렬 */
-  border-right: 2px solid white; /* 세로 구분선 추가 */
+  color: white;
+  text-align: center;
+  border-right: 2px solid white;
 
   &:last-child {
-    border-right: none; /* 마지막 셀 오른쪽 경계선 없애기 */
+    border-right: none;
   }
 `;
 
 const StyledTd = styled.td`
   padding: 12px;
-  border-bottom: 1px solid #e0e0e0; /* 하단 구분선 */
-  text-align: center; /* 가운데 정렬 */
-  border-right: 2px solid white; /* 세로 구분선 추가 */
+  border-bottom: 1px solid #e0e0e0;
+  text-align: center;
+  border-right: 2px solid white;
 
   &:last-child {
-    border-right: none; /* 마지막 셀 오른쪽 경계선 없애기 */
+    border-right: none;
   }
 
   &:hover {
-    background-color: #f1f1f1; /* 호버 시 배경색 변경 */
+    background-color: #f1f1f1;
   }
 `;
 
 const DeleteButton = styled.button`
   padding: 6px 12px;
-  background-color: #e74c3c; /* 빨간색 */
+  background-color: #e74c3c;
   color: white;
   border: none;
   border-radius: 4px;
@@ -58,7 +58,7 @@ const DeleteButton = styled.button`
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: #c0392b; /* 호버 시 더 어두운 빨간색 */
+    background-color: #c0392b;
   }
 `;
 
@@ -100,7 +100,7 @@ const PostForm = () => {
       return true;
     });
     setFilteredPosts(filtered);
-    setSearchParams(searchData); // 검색 파라미터 업데이트
+    setSearchParams(searchData);
   };
 
   return (
