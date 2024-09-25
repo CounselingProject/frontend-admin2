@@ -21,7 +21,6 @@ const UpdateContainer = ({ params }) => {
     const onSubmit = useCallback(async (e) => {
       e.preventDefault();
 
-      // 유효성 검사
       const requiredFields = {
         bid: t('게시판_ID를_입력하세요'),
         bName: t('게시판_이름을_입력하세요'),
@@ -44,7 +43,6 @@ const UpdateContainer = ({ params }) => {
 
       try {
         await register(form);
-        // 성공 후 처리
       } catch (err) {
         setErrors(err.message);
       }

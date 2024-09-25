@@ -8,12 +8,12 @@ import { IoIosRadioButtonOff, IoIosRadioButtonOn } from "react-icons/io";
 import FileUpload from '@/commons/components/FileUpload';
 
 const FormBox = styled.form`
-  width: 100%; /* 폼 전체 너비 */
-  max-width: 1200px; /* 최대 너비 */
-  padding: 20px; /* 내부 여백 */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 그림자 */
-  background-color: #fff; /* 배경색 */
-  border-radius: 8px; /* 모서리 둥글게 */
+  width: 100%; 
+  max-width: 1200px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-radius: 8px;
 `;
 
 const RadioButtonContainer = styled.label`
@@ -24,21 +24,21 @@ const RadioButtonContainer = styled.label`
   font-size: 16px;
 
   input {
-    display: none; /* 원래 라디오 버튼은 숨김 */
+    display: none;
   }
 
   svg {
     margin-right: 5px;
-    color: #4A90E2; /* 선택된 색상 */
+    color: #4A90E2; 
     transition: color 0.3s ease;
   }
 
   &:hover svg {
-    color: #007BFF; /* 호버 시 색상 */
+    color: #007BFF;
   }
 
   &.checked svg {
-    color: #007BFF; /* 선택된 라디오 버튼 색상 */
+    color: #007BFF;
   }
 `;
 
@@ -58,43 +58,42 @@ const RadioButton = ({ id, name, value, checked, onChange, label }) => (
 );
 
 const StyledTable = styled.table`
-  width: 100%; /* 테이블 전체 너비 */
-  border-collapse: collapse; /* 테이블 경계 제거 */
-  margin-bottom: 30px; /* 아래 여백 */
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
 `;
 
 const StyledTh = styled.th`
-  padding: 12px; /* 여백 */
-  background-color: #3f51b5; /* 변경할 배경색 */
-  border-bottom: 1px solid white; /* 흰색 구분 선 추가 */
-  height: 60px; /* 원하는 높이 설정 */
-  color: white; /* 글자색을 흰색으로 설정 */
+  padding: 12px;
+  background-color: #3f51b5; 
+  border-bottom: 1px solid white;
+  height: 60px;
+  color: white;
 `;
 
 const StyledTd = styled.td`
-  padding: 12px; /* 여백 */
-  border-bottom: 1px solid #e0e0e0; /* 아래 경계선 */
-  display: flex; /* 가로 정렬을 위해 flex 사용 */
-  align-items: center; /* 수직 정렬 */
-  height: 60px; /* 원하는 높이 설정 */
-  background-color: #f9f9f9; /* 배경색 추가 */
+  padding: 12px;
+  border-bottom: 1px solid #e0e0e0; 
+  display: flex; 
+  align-items: center;
+  height: 60px;
+  background-color: #f9f9f9; 
   
   textarea {
-    width: 100%; /* 너비를 100%로 설정 */
-    height: 100px; /* 원하는 높이로 설정 */
-    resize: vertical; /* 수직으로 크기 조정 가능 */
-    padding: 8px; /* 내부 여백 추가 */
-    border: 1px solid #ccc; /* 테두리 추가 */
-    border-radius: 4px; /* 모서리 둥글게 */
-    font-size: 14px; /* 폰트 크기 설정 */
+    width: 100%;
+    height: 100px;
+    resize: vertical;
+    padding: 8px;
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+    font-size: 14px; 
   }
 `;
 
 const StyledFileUpload = styled(FileUpload)`
-  /* 원하는 크기와 스타일로 조정 */
-  font-size: 0.8em; /* 폰트 크기 조정 */
-  padding: 5px 10px; /* 패딩 조정 */
-  margin: 5px 0; /* 위아래 여백 조정 */
+  font-size: 0.8em;
+  padding: 5px 10px;
+  margin: 5px 0;
 `;
 
 const BoardForm = ({ form, errors, onSubmit, onChange, insertImageCallback }) => {

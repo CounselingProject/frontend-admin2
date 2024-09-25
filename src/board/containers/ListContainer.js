@@ -5,20 +5,19 @@ import BoardList from '../components/BoardList';
 import SearchForm from '../components/SearchForm';
 
 const ListContainer = ({ searchParams }) => {
-    const { setMenuCode, setSubMenuCode } = getCommonActions();
+  const { setMenuCode, setSubMenuCode } = getCommonActions();
 
-    useLayoutEffect(() => {
-        setMenuCode("board");
-        setSubMenuCode("list");
-    }, [setMenuCode, setSubMenuCode]);
+  useLayoutEffect(() => {
+    setMenuCode('board');
+    setSubMenuCode('list');
+  }, [setMenuCode, setSubMenuCode]);
 
-    return (
-        <section>
-            <h1>게시판 목록</h1>
-            <SearchForm searchParams={searchParams} />
-            <BoardList />
-        </section>
-    );
+  return (
+    <section>
+      <h1>게시판 목록</h1>
+      <BoardList searchParams={searchParams} />
+    </section>
+  );
 };
 
 export default React.memo(ListContainer);

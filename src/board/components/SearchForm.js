@@ -50,7 +50,7 @@ const SearchForm = ({ onSearch, searchParams }) => {
         } else {
             console.error('onSearch 함수가 전달되지 않았습니다.');
         }
-    };
+    }; 
 
     return (
         <SearchContainer>
